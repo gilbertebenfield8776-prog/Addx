@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Lisa Christiansen | Exclusive VIP Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            background-color: #030303; 
+            color: #ffffff; 
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        h1, h2, button, .font-bold { font-family: 'Montserrat', sans-serif; }
+
+        /* Neon Background Blobs */
+        .neon-blob {
+            position: fixed; width: 400px; height: 400px; 
+            background: radial-gradient(circle, rgba(0,242,255,0.15) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1; filter: blur(60px);
+        }
+
+        .glass { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(25px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 24px;
+        }
+
+        /* Fake Call Animations */
+        @keyframes ring-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        .btn-accept { animation: ring-pulse 1.5s infinite; }
+
+        @keyframes avatar-pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 242, 255, 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(0, 242, 255, 0.8); }
+        }
+        .avatar-calling { animation: avatar-pulse 2s infinite; }
+
+        /* Custom scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0, 242, 255, 0.5); border-radius: 4px; }
+
+        /* Progress Bar */
+        @keyframes loadProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        .loading-bar { animation: loadProgress 2s ease-in-out forwards; }
+    </style>
+</head>
+<body>
+
+    <div class="neon-blob top-0 -left-20"></div>
+    <div class="neon-blob bottom-0 -right-20" style="background: radial-gradient(circle, rgba(112,0,255,0.15) 0%, rgba(0,0,0,0) 70%);"></div>
+
+    <div id="mainContent" class="transition-all duration-500">
+        <header class="p-4 md:p-6 border-b border-white/10 flex justify-between items-center glass sticky top-0 z-40">
+            <div class="flex items-center gap-3 md:gap-4">
+                <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-cyan-400 object-cover shadow-lg shadow-cyan-500/30">
+                <div>
+                    <h1 class="text-lg md:text-xl font-black italic">DR. LISA <span class="text-cyan-400">CHRISTIANSEN</span></h1>
+                    <p class="text-[9px] md:text-[10px] text-gray-500 tracking-widest uppercase">Verified Private Portal</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 bg-red-500 rounded-full animate-ping"></span>
+                <span class="text-[10px] md:text-xs font-bold text-red-500 uppercase tracking-tighter">Live Stream</span>
+            </div>
+        </header>
+
+        <div class="max-w-7xl mx-auto px-4 mt-6 md:mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+            <div class="lg:col-span-2 space-y-6">
+                <div class="relative rounded-[24px] md:rounded-[32px] overflow-hidden glass border-white/10 aspect-video shadow-2xl group cursor-pointer" onclick="goToCPA()">
+                    <iframe id="liveCam" src="https://drive.google.com/file/d/1ukOYy9zg6iNI1TdMOV98l5wbuTnEvU9D/preview" class="w-full h-full pointer-events-none opacity-50 brightness-110 blur-sm" frameborder="0"></iframe>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center z-20">
+                        <div class="w-16 h-16 bg-cyan-400/20 border-2 border-cyan-400 rounded-full flex items-center justify-center backdrop-blur-md mb-4 animate-pulse">
+                            <svg class="w-8 h-8 text-cyan-400 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <p class="text-xs font-black uppercase tracking-widest text-cyan-400 text-center px-4">Waiting for connection...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass flex flex-col h-[500px] md:h-[600px] border-white/10 relative overflow-hidden">
+                <div class="p-4 border-b border-white/10 bg-black/40">
+                    <h3 class="font-black text-[10px] md:text-xs uppercase tracking-widest text-gray-400">Secure Live Chat</h3>
+                </div>
+                <div id="chatBox" class="flex-1 p-4 overflow-y-auto space-y-4 text-xs md:text-sm font-light custom-scrollbar"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="incomingCallScreen" class="fixed inset-0 bg-[#0a0a0a]/95 backdrop-blur-3xl z-[100] flex flex-col items-center justify-between py-16 hidden opacity-0 transition-opacity duration-700">
+        
+        <div class="text-center mt-10">
+            <p class="text-cyan-400 text-sm font-bold tracking-widest uppercase mb-4 animate-pulse">Secure End-to-End Encrypted Call</p>
+            <div class="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-6">
+                <div class="absolute inset-0 rounded-full border-4 border-cyan-400/30 animate-ping"></div>
+                <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="w-full h-full rounded-full border-4 border-cyan-400 object-cover avatar-calling relative z-10">
+            </div>
+            <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight">Dr. Lisa Christiansen</h2>
+            <p class="text-gray-400 text-lg mt-2">Incoming Video Call...</p>
+        </div>
+
+        <div class="flex justify-center gap-12 w-full px-8 mb-10">
+            <div class="flex flex-col items-center gap-3 cursor-pointer" onclick="handleCallAction('decline')">
+                <div class="w-16 h-16 md:w-20 md:h-20 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-400 transition shadow-[0_0_20px_rgba(239,68,68,0.5)]">
+                    <svg class="w-8 h-8 text-white transform rotate-[135deg]" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16.32v3.38a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.31 2h3.38a2 2 0 012 1.72 12.84 12.84 0 00.57 2.81 2 2 0 01-.45 2.11L7.5 10.05a16.03 16.03 0 006.45 6.45l1.41-1.41a2 2 0 012.11-.45 12.84 12.84 0 002.81.57A2 2 0 0121 16.32z"/></svg>
+                </div>
+                <span class="text-white text-xs font-bold tracking-wider">Decline</span>
+            </div>
+
+            <div class="flex flex-col items-center gap-3 cursor-pointer" onclick="handleCallAction('accept')">
+                <div class="w-16 h-16 md:w-20 md:h-20 bg-green-500 rounded-full flex items-center justify-center btn-accept hover:bg-green-400 transition">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16.32v3.38a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.31 2h3.38a2 2 0 012 1.72 12.84 12.84 0 00.57 2.81 2 2 0 01-.45 2.11L7.5 10.05a16.03 16.03 0 006.45 6.45l1.41-1.41a2 2 0 012.11-.45 12.84 12.84 0 002.81.57A2 2 0 0121 16.32z"/></svg>
+                </div>
+                <span class="text-white text-xs font-bold tracking-wider">Accept</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="connectingScreen" class="fixed inset-0 bg-[#0a0a0a]/95 backdrop-blur-3xl z-[110] flex flex-col items-center justify-center p-6 hidden">
+        
+        <div id="loadingPhase" class="text-center w-full max-w-md">
+            <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="w-24 h-24 rounded-full border-2 border-cyan-400 mx-auto mb-6 object-cover opacity-50">
+            <h2 class="text-2xl font-black text-white mb-4 animate-pulse">Securing Connection...</h2>
+            <div class="w-full bg-gray-800 rounded-full h-2 mb-2 overflow-hidden">
+                <div class="bg-cyan-400 h-2 rounded-full loading-bar"></div>
+            </div>
+            <p class="text-xs text-cyan-400 font-mono">Establishing P2P Video Link...</p>
+        </div>
+
+        <div id="verifyPhase" class="text-center w-full max-w-md glass border-red-500/50 p-8 rounded-[32px] hidden shadow-[0_0_40px_rgba(239,68,68,0.2)]">
+            <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-black text-white mb-2">CONNECTION BLOCKED</h2>
+            <p class="text-red-400 font-bold mb-6 text-sm uppercase">Unregistered Device Detected</p>
+            
+            <div class="bg-black/50 p-4 rounded-xl border border-white/10 mb-6 text-left">
+                <p class="text-sm text-gray-300">
+                    Dr. Lisa is waiting in the private room. To protect her privacy, you must <span class="text-cyan-400 font-bold">create a FREE account</span> to verify your age and enable the video feed.
+                </p>
+            </div>
+            
+            <button onclick="goToCPA()" class="w-full bg-cyan-400 py-5 rounded-2xl font-black text-xl text-black hover:bg-cyan-300 transition transform hover:scale-105 shadow-[0_0_20px_rgba(0,242,255,0.4)]">
+                CREATE FREE ACCOUNT 📞
+            </button>
+            <p class="text-[10px] text-gray-500 mt-4 uppercase font-bold tracking-widest">Takes 30 seconds • 100% Free</p>
+        </div>
+
+    </div>
+
+    <script>
+        const cpaLink = "https://t.taffizerq.com/click?pid=3844&offer_id=2310";
+        function goToCPA() { window.location.href = cpaLink; }
+
+        // TRIGGER FAKE CALL AFTER 3 SECONDS
+        setTimeout(() => {
+            document.getElementById('mainContent').classList.add('blur-md');
+            const callScreen = document.getElementById('incomingCallScreen');
+            callScreen.classList.remove('hidden');
+            // Allow display:flex to apply before fading in
+            setTimeout(() => {
+                callScreen.classList.remove('opacity-0');
+            }, 50);
+        }, 3000);
+
+        function handleCallAction(action) {
+            // Both Accept and Decline lead to the same trap!
+            document.getElementById('incomingCallScreen').classList.add('hidden');
+            const connectScreen = document.getElementById('connectingScreen');
+            connectScreen.classList.remove('hidden');
+
+            if (action === 'decline') {
+                // If they declined, change the loading text slightly to mock a missed call callback
+                document.querySelector('#loadingPhase h2').innerText = "Reconnecting Call...";
+            }
+
+            // Simulate loading for 2 seconds, then show the BLOCK/CPA required message
+            setTimeout(() => {
+                document.getElementById('loadingPhase').classList.add('hidden');
+                document.getElementById('verifyPhase').classList.remove('hidden');
+            }, 2000);
+        }
+
+        // Realistic Chat logic in background
+        const chatBox = document.getElementById('chatBox');
+        const users = ["Alex_99", "MarkConsult", "James_W", "Doctor_Fan", "VIP_User_7"];
+        const messages = [
+            "Just created my account, joining the video now!",
+            "Is the call free? Edit: Yes it is!",
+            "Lisa, I am accepting the call now.",
+            "Account verification took me 1 minute.",
+            "Wow the 1-on-1 quality is amazing."
+        ];
+
+        function addMessage() {
+            let user = users[Math.floor(Math.random() * users.length)];
+            let msg = messages[Math.floor(Math.random() * messages.length)];
+            
+            let div = document.createElement('div');
+            div.className = "bg-white/5 p-3 rounded-2xl border border-white/5";
+            div.innerHTML = `<span class="font-black text-cyan-400 text-[10px] uppercase mr-2">${user}:</span> <span class="text-gray-300 font-normal text-xs">${msg}</span>`;
+            
+            chatBox.appendChild(div);
+            if(chatBox.children.length > 8) chatBox.removeChild(chatBox.firstChild);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            
+            setTimeout(addMessage, Math.random() * 3000 + 1500);
+        }
+        addMessage();
+    </script>
+</body>
+</html>
