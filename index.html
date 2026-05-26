@@ -18,32 +18,19 @@
         .locked-card { background: #111827; border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 16px; padding: 14px; text-align: center; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; }
         .locked-card:hover { border-color: #00e5ff; box-shadow: 0 0 25px rgba(0, 229, 255, 0.15); transform: translateY(-3px); }
         
-        .video-vault-card { background: linear-gradient(145deg, #0f172a, #1e1b4b); border: 1px solid rgba(255, 0, 127, 0.15); border-radius: 12px; position: relative; overflow: hidden; cursor: pointer; transition: all 0.25s; aspect-ratio: 4/3; display: flex; flex-direction: column; justify-content: flex-end; p: 3; }
+        .video-vault-card { background: linear-gradient(145deg, #0f172a, #1e1b4b); border: 1px solid rgba(255, 0, 127, 0.15); border-radius: 12px; position: relative; overflow: hidden; cursor: pointer; transition: all 0.25s; aspect-ratio: 4/3; display: flex; flex-direction: column; justify-content: flex-end; }
         .video-vault-card:hover { border-color: #ff007f; box-shadow: 0 0 20px rgba(255, 0, 127, 0.25); transform: scale(1.02); }
         
         .unlock-badge { background: rgba(0, 0, 0, 0.65); padding: 4px 10px; border-radius: 20px; font-size: 9px; color: #cbd5e1; display: inline-flex; align-items: center; gap: 4px; border: 1px solid rgba(255,255,255,0.08); }
         
-        .msg-lisa { background: linear-gradient(135deg, rgba(255,0,127,0.12) 0%, rgba(0,229,255,0.12) 100%); border: 1px solid rgba(255,0,127,0.25); border-radius: 18px 18px 18px 4px; color: #f8fafc; box-shadow: 0 4px 20px rgba(255,0,127,0.06); }
-        .msg-user { background: #1e293b; border: 1px solid rgba(255,255,255,0.08); border-radius: 18px 18px 4px 18px; color: #f1f5f9; }
-        
-        @keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); transform: scale(1); } 50% { transform: scale(1.05); } 70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); transform: scale(1); } }
-        .btn-accept { animation: pulse-ring 1.2s infinite; }
         @keyframes live-blink { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.15); } }
         .live-dot { animation: live-blink 1.4s infinite; }
 
-        .typing-container { display: flex; align-items: center; gap: 5px; padding: 12px 18px; background: rgba(255,0,127,0.08); border: 1px solid rgba(255,0,127,0.15); border-radius: 24px; width: fit-content; }
-        .dot { width: 6px; height: 6px; background: #00e5ff; border-radius: 50%; animation: typeBlink 1.4s infinite both; }
-        .dot:nth-child(1) { animation-delay: -0.32s; }
-        .dot:nth-child(2) { animation-delay: -0.16s; }
-        @keyframes typeBlink { 0%, 80%, 100% { transform: scale(0); opacity: 0.3; } 40% { transform: scale(1); opacity: 1; } }
-
-        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 0, 127, 0.3); border-radius: 10px; }
+        .progress-bar-fill { width: 0%; transition: width 0.4s ease-in-out; }
     </style>
 </head>
 <body class="flex flex-col items-center min-h-screen relative">
 
-    <audio id="ringtone" src="https://assets.mixkit.co/active_storage/sfx/2870/2870-preview.mp3" loop preload="auto"></audio>
     <div class="neon-blob-1"></div>
     <div class="neon-blob-2"></div>
 
@@ -64,35 +51,35 @@
                     <div class="w-2 h-2 bg-red-500 rounded-full live-dot shadow-[0_0_8px_rgba(239,68,68,0.9)]"></div>
                     <span class="text-[9px] font-bold text-red-400 uppercase tracking-widest">1 Secure Connection</span>
                 </div>
-                <span class="text-[8px] text-gray-500 uppercase tracking-widest">ID: FEED-SSL-X9</span>
+                <span class="text-[8px] text-gray-500 uppercase tracking-widest">ID: GATE-SSL-V8</span>
             </div>
         </div>
     </header>
 
     <main id="dashboardView" class="w-full max-w-2xl px-4 flex flex-col gap-5 mt-2 mb-10 transition-all duration-500">
         
-        <div class="relative rounded-[24px] overflow-hidden glass aspect-[16/9] shadow-2xl cursor-pointer group border border-[#00e5ff]/10" onclick="goToTeaser()">
+        <div class="relative rounded-[24px] overflow-hidden glass aspect-[16/9] shadow-2xl cursor-pointer group border border-[#00e5ff]/10" onclick="startVerification()">
             <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700">
             <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent flex flex-col justify-end p-6">
                 <div class="w-16 h-16 bg-[#ff007f]/20 border-2 border-[#ff007f] rounded-full flex items-center justify-center mb-3 mx-auto backdrop-blur-sm group-hover:bg-[#ff007f]/40 transition-colors animate-pulse">
                     <svg class="w-8 h-8 text-[#ff007f] ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </div>
-                <h2 class="text-center font-black text-lg text-white tracking-wider uppercase">TAP TO CONNECT TO MY LIVE BEDROOM FEED</h2>
+                <h2 class="text-center font-black text-base sm:text-lg text-white tracking-wider uppercase">TAP TO CONNECT TO MY LIVE BEDROOM FEED</h2>
             </div>
         </div>
 
         <div class="grid grid-cols-3 gap-2.5">
-            <div class="locked-card" onclick="goToTeaser()">
+            <div class="locked-card" onclick="startVerification()">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="w-7 h-7 mb-1.5">
                 <div class="text-[11px] font-bold text-white">WhatsApp</div>
                 <div class="unlock-badge">🔒 Locked</div>
             </div>
-            <div class="locked-card" onclick="goToTeaser()">
+            <div class="locked-card" onclick="startVerification()">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="w-7 h-7 mb-1.5">
                 <div class="text-[11px] font-bold text-white">Telegram</div>
                 <div class="unlock-badge">🔒 Locked</div>
             </div>
-            <div class="locked-card" onclick="goToTeaser()">
+            <div class="locked-card" onclick="startVerification()">
                 <img src="https://upload.wikimedia.org/wikipedia/en/c/c4/Snapchat_logo.svg" class="w-7 h-7 mb-1.5">
                 <div class="text-[11px] font-bold text-white">Snapchat</div>
                 <div class="unlock-badge">🔒 Locked</div>
@@ -107,281 +94,169 @@
             
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 <script>
-                    const vids = [
-                        "1Tnt3gPjiDCdUa5XgXHTcjT8pgutfaRbJ", "1VwRl5_0Fc_BhbPtloFWQTb6dl2AVAGt6", 
-                        "1XD3gmsMDt-ha_o90ocz9z-Pw2SwkN87a", "1BfSYJN_rrLkxNrz4aK3I2UWpioYO5BKY", 
-                        "1eg9qondGDgK7sMykBrr04JIP6o67WZlC", "1AfR7hxH_XIsFeDIIYFMNyxDc1fkf1hyx", 
-                        "1ltdFQQM_j_wVVGJKim1bvXA6Z970RcHY", "1DljnoDdClNr7db7M_okO1j8ccuDI-hBO", 
-                        "1t3hTzBZVNap-QgDYVPrho_0cch46Vj2k", "1ukOYy9zg6iNI1TdMOV98l5wbuTnEvU9D", 
-                        "1ajE9IYr4H_6Pdy1C7uVl6pbbTGDcKE77", "1OcwjAuiaUJvehENuotDkxB4mKvl5RJl-", 
-                        "1vRivbiFDOWdoBdV61QqXmC9C6ZffqSl9", "13SzbqnfE2kgRpaE2cdNV_EJG3I0UwP8G", 
-                        "1gq-CSLvW_WPh3HUbGs3x-G0Wirj3G26M", "1lqCsh96482RefA6jwlG2BWneU5Ig4-Zt", 
-                        "13oViQuT9QA_xEa2hToxZ4dzzTjI_cPXz", "1swmdmsVnKltCYkzJxRzGfG9Vocb6G5O9"
-                    ];
-                    
-                    vids.forEach((id, idx) => {
+                    const totalClips = 18;
+                    for (let idx = 0; idx < totalClips; idx++) {
                         document.write(`
-                            <div class="video-vault-card p-3 flex flex-col justify-between" onclick="goToTeaser()">
+                            <div class="video-vault-card p-3 flex flex-col justify-between" onclick="startVerification()">
                                 <div class="flex justify-between items-start w-full">
                                     <span class="text-[9px] font-black bg-black/60 px-2 py-0.5 rounded text-[#00e5ff]">FEED #${idx + 1}</span>
-                                    <span class="text-[9px] text-red-400 font-bold animate-pulse">🔒 LOCKED</span>
+                                    <span class="text-[9px] text-red-400 font-bold">🔒 LOCKED</span>
                                 </div>
                                 <div class="w-full mt-8 text-center bg-black/40 py-2 rounded border border-white/5 backdrop-blur-sm">
                                     <div class="text-[10px] font-black tracking-wide text-gray-200">Private_Clip_${idx+1}.mp4</div>
-                                    <div class="text-[8px] text-gray-400 mt-0.5 uppercase tracking-widest">Click to Unlock Stream</div>
+                                    <div class="text-[8px] text-gray-400 mt-0.5 uppercase tracking-widest">Unlock Stream</div>
                                 </div>
                             </div>
                         `);
-                    });
+                    }
                 </script>
             </div>
         </div>
     </main>
 
-    <div id="teaserView" class="fixed inset-0 z-50 bg-black hidden flex-col justify-center items-center">
-        <iframe id="liveVideo" src="https://drive.google.com/file/d/1t3hTzBZVNap-QgDYVPrho_0cch46Vj2k/preview" class="w-full h-full pointer-events-none opacity-90" frameborder="0"></iframe>
-        <div class="absolute top-8 left-0 right-0 flex justify-center">
-            <span class="bg-pink-600 px-5 py-1 rounded-full text-white text-xs font-black uppercase tracking-widest live-dot">SYNCHRONIZING FEED TUNNEL...</span>
-        </div>
-        <div class="absolute inset-0 bg-transparent" style="z-index: 60;"></div>
-    </div>
-
-    <div id="callView" class="fixed inset-0 bg-[#050811]/98 backdrop-blur-2xl z-[100] flex-col items-center justify-between py-20 hidden opacity-0 transition-opacity duration-300">
-        <div class="text-center w-full px-4">
-            <p class="text-[#00e5ff] text-xs font-bold tracking-widest uppercase mb-6 animate-pulse">Establishing Secure Video Bridge</p>
-            <div class="relative w-36 h-36 mx-auto mb-6">
-                <div class="absolute inset-0 rounded-full border-4 border-[#ff007f]/30 animate-ping" style="animation-duration: 1.6s;"></div>
-                <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="w-full h-full rounded-full border-4 border-[#ff007f] object-cover relative z-10 shadow-[0_0_50px_rgba(255,0,127,0.4)]">
-            </div>
-            <h2 class="text-2xl font-black text-white tracking-tight mb-2">Dr. Lisa Christiansen</h2>
-            <p class="text-green-400 text-sm font-bold animate-pulse">Requesting real-time feed activation...</p>
-        </div>
-        <div class="flex justify-center gap-16 w-full px-8 mb-10">
-            <div class="flex flex-col items-center gap-3 cursor-pointer z-50" onclick="acceptCall()">
-                <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-500 shadow-[0_0_20px_rgba(220,38,38,0.4)]"><svg class="w-8 h-8 text-white transform rotate-[135deg]" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16.32v3.38a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.31 2h3.38a2 2 0 012 1.72 12.84 12.84 0 00.57 2.81 2 2 0 01-.45 2.11L7.5 10.05a16.03 16.03 0 006.45 6.45l1.41-1.41a2 2 0 012.11-.45 12.84 12.84 0 002.81.57A2 2 0 0121 16.32z"/></svg></div>
-                <span class="text-white text-xs font-bold opacity-70">Decline</span>
-            </div>
-            <div class="flex flex-col items-center gap-3 cursor-pointer z-50" onclick="acceptCall()">
-                <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center btn-accept"><svg class="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16.32v3.38a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.31 2h3.38a2 2 0 012 1.72 12.84 12.84 0 00.57 2.81 2 2 0 01-.45 2.11L7.5 10.05a16.03 16.03 0 006.45 6.45l1.41-1.41a2 2 0 012.11-.45 12.84 12.84 0 002.81.57A2 2 0 0121 16.32z"/></svg></div>
-                <span class="text-white text-xs font-bold">Accept Stream</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="chatView" class="hidden w-full max-w-2xl px-4 flex-col flex-1 pb-4 h-full min-h-[560px]">
-        <div class="glass flex-1 flex flex-col overflow-hidden relative shadow-[0_0_50px_rgba(255,0,127,0.04)] border border-white/5">
+    <div id="gateOverlay" class="fixed inset-0 z-50 bg-[#050811]/98 backdrop-blur-2xl hidden flex-col items-center justify-center p-4">
+        <div class="w-full max-w-md glass p-6 sm:p-8 shadow-[0_0_50px_rgba(0,229,255,0.1)] border border-white/10 relative">
             
-            <div class="bg-black/40 p-3 border-b border-white/5 flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
-                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Encrypted Private Session</span>
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-white transition text-sm" onclick="closeVerification()">✕ Close</button>
+            
+            <div class="flex items-center gap-3 border-b border-white/5 pb-4 mb-6">
+                <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="w-10 h-10 rounded-full border-2 border-[#ff007f] object-cover">
+                <div>
+                    <h3 class="text-xs font-black uppercase text-white tracking-wider">Gateway Authorization</h3>
+                    <p class="text-[10px] text-gray-400">Verifying secure pipeline structure...</p>
                 </div>
             </div>
 
-            <div id="chatLog" class="flex-1 p-4 overflow-y-auto space-y-4 custom-scrollbar bg-[#03060d]">
-                </div>
-
-            <div id="typingBox" class="hidden px-4 pb-3 bg-[#03060d]">
-                <div class="typing-container">
-                    <span class="text-[10px] font-bold text-gray-400 mr-2 uppercase tracking-widest">Lisa is typing</span>
-                    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            <div id="step1" class="wizard-step flex flex-col">
+                <span class="text-[10px] uppercase tracking-widest font-black text-[#00e5ff] mb-2">Security Check: Step 1 of 3</span>
+                <h2 class="text-lg font-black text-white leading-tight mb-4">Are you at least 18 years of age or older?</h2>
+                <p class="text-xs text-gray-400 mb-6">This private system contains explicit streaming feeds from Dr. Lisa's personal bedroom. Adult content filtering is active.</p>
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="nextStep(2)" class="bg-gradient-to-r from-[#ff007f] to-pink-600 text-white font-black py-3.5 rounded-xl text-xs uppercase tracking-wider hover:scale-[1.02] transition shadow-lg">YES, I AM 18+</button>
+                    <button onclick="closeVerification()" class="bg-white/5 hover:bg-white/10 text-gray-300 font-bold py-3.5 rounded-xl text-xs uppercase tracking-wider transition">NO, LEAVE</button>
                 </div>
             </div>
 
-            <div class="p-3 bg-black/60 border-t border-white/5 flex gap-2">
-                <input type="text" id="userInput" placeholder="Type a message to Lisa..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#ff007f] text-white" onkeypress="if(event.key === 'Enter') handleUserSend()">
-                <button onclick="handleUserSend()" class="bg-gradient-to-r from-[#ff007f] to-[#00e5ff] text-white font-black px-6 rounded-xl hover:scale-103 transition shadow-lg text-sm uppercase tracking-wider">Send</button>
+            <div id="step2" class="wizard-step hidden flex flex-col">
+                <span class="text-[10px] uppercase tracking-widest font-black text-[#ff007f] mb-2">Security Check: Step 2 of 3</span>
+                <h2 class="text-lg font-black text-white leading-tight mb-4">Do you agree to keep her stream fully private?</h2>
+                <p class="text-xs text-gray-400 mb-6">Recording, taking screenshots, or sharing media from this server is strictly illegal. Violators are tracked via secure tunnel protocols.</p>
+                <div class="flex flex-col gap-2.5">
+                    <button onclick="nextStep(3)" class="bg-gradient-to-r from-[#00e5ff] to-blue-600 text-slate-950 font-black py-3.5 rounded-xl text-xs uppercase tracking-wider hover:scale-[1.02] transition shadow-lg">I AGREE, KEEP IT SECRET</button>
+                    <button onclick="nextStep(3)" class="bg-white/5 hover:bg-white/10 text-gray-300 font-bold py-3.5 rounded-xl text-xs uppercase tracking-wider transition">I WILL NOT RECORD ANY FEEDS</button>
+                </div>
             </div>
+
+            <div id="step3" class="wizard-step hidden flex flex-col">
+                <span class="text-[10px] uppercase tracking-widest font-black text-[#00e5ff] mb-2">Security Check: Step 3 of 3</span>
+                <h2 class="text-lg font-black text-white leading-tight mb-4">What type of real-time stream do you prefer?</h2>
+                <p class="text-xs text-gray-400 mb-6">Select your streaming environment format below to synchronize the server encryption layers properly.</p>
+                <div class="flex flex-col gap-2.5">
+                    <button onclick="runLoadingSequence()" class="bg-white/5 border border-white/10 hover:border-[#ff007f] text-left p-3 rounded-xl transition flex items-center justify-between group">
+                        <span class="text-xs font-bold group-hover:text-[#ff007f]">1-on-1 Interactive Camera Feed</span>
+                        <span class="text-[10px] text-gray-500">▶</span>
+                    </button>
+                    <button onclick="runLoadingSequence()" class="bg-white/5 border border-white/10 hover:border-[#00e5ff] text-left p-3 rounded-xl transition flex items-center justify-between group">
+                        <span class="text-xs font-bold group-hover:text-[#00e5ff]">Unlock All 18 Pre-Recorded Vault Clips</span>
+                        <span class="text-[10px] text-gray-500">▶</span>
+                    </button>
+                    <button onclick="runLoadingSequence()" class="bg-white/5 border border-white/10 hover:border-purple-500 text-left p-3 rounded-xl transition flex items-center justify-between group">
+                        <span class="text-xs font-bold group-hover:text-purple-400">Direct Snapchat & WhatsApp Contacts</span>
+                        <span class="text-[10px] text-gray-500">▶</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="loadingStep" class="wizard-step hidden flex flex-col items-center text-center py-6">
+                <div class="relative w-16 h-16 mb-4">
+                    <div class="absolute inset-0 rounded-full border-4 border-[#ff007f]/20 border-t-[#ff007f] animate-spin"></div>
+                </div>
+                <h2 id="loadingText" class="text-sm font-black text-white uppercase tracking-wider mb-2">Analyzing Responses...</h2>
+                <p class="text-[11px] text-gray-400 mb-4 max-w-xs">Configuring live end-to-end matrix sync layers.</p>
+                <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                    <div id="progressBar" class="h-full bg-gradient-to-r from-[#ff007f] to-[#00e5ff] progress-bar-fill"></div>
+                </div>
+            </div>
+
+            <div id="finalStep" class="wizard-step hidden flex flex-col text-center items-center">
+                <div class="w-12 h-12 bg-green-500/10 border border-green-500/30 text-green-400 rounded-full flex items-center justify-center text-xl mb-3 animate-bounce">✓</div>
+                <span class="text-[10px] uppercase tracking-widest font-black text-green-400 mb-1">Access Granted Permanently</span>
+                <h2 class="text-xl font-black text-white leading-tight mb-3">FINALIZE YOUR FREE ANTI-BOT VERIFICATION</h2>
+                <p class="text-xs text-gray-400 mb-6">You are qualified for immediate access! To bypass malicious bots, complete a quick 60-second sponsor registration on the next page.</p>
+                
+                <a id="cpaAnchor" href="https://t.taffizerq.com/click?pid=3844&offer_id=2310" target="_blank" class="w-full bg-gradient-to-r from-[#ff007f] via-purple-600 to-[#00e5ff] text-white font-black py-4 rounded-xl text-sm uppercase tracking-widest shadow-[0_0_30px_rgba(255,0,127,0.4)] hover:scale-[1.02] transition block animate-pulse">
+                    🔓 UNLOCK STREAM & VAULT NOW
+                </a>
+                
+                <span class="text-[9px] text-gray-500 mt-3 uppercase tracking-widest">No Cost • 100% Secure Sponsor Verification</span>
+            </div>
+
         </div>
     </div>
 
     <script>
-        // --- CENTRAL ACCESS ROUTING LINKS ---
+        // --- CPA ACCESS LINKS ---
         const CPA_LINK = "https://t.taffizerq.com/click?pid=3844&offer_id=2310"; 
-        const FIRST_CLIP_LINK = "https://drive.google.com/file/d/1ltdFQQM_j_wVVGJKim1bvXA6Z970RcHY/view"; 
-        
-        const ringtone = document.getElementById('ringtone');
-        let chatStep = 0;
-        let isBotTyping = false;
-        let userName = "Babe";
-        let fallbackIndex = 0;
 
-        // Stock Queue structure for non-mapped prompts
-        const alternateVault = [
-            "I'm sitting here right in my bed waiting on you honey... 😩 Please click that premium link above, do the quick 60-second safety check and unlock my video camera feed right now!",
-            "I don't wanna just type here, I want to see you react to me live on cam!💦 Go complete the sponsor registration, it's free. Come back to chat right after!",
-            "Don't be shy with me babe! My private Snapchat and cell number are listed inside that security verification link. Go verify so we can connect 💋",
-            "Mmm, you are making me wait too long and I'm getting super impatient... 😈 Click the age link above, sign up for free and unlock all 18 private vault clips instantly!"
-        ];
-
-        // --- THE COGNITIVE NLP ROUTING MATRIX (AUTOMATIC 1000+ QUESTION MAPPER) ---
-        const nlpMatrix = [
-            {
-                keywords: ["from", "live", "location", "country", "place", "where"],
-                reply: "I'm originally from Los Angeles, California, but currently staying all alone in my private apartment here. 💋 Where are you from honey?"
-            },
-            {
-                keywords: ["age", "old", "year", "how old"],
-                reply: "I'm 26 years young sweetie! Age is just a number to me, it's all about how you handle a woman. 😉 How old are you?"
-            },
-            {
-                keywords: ["doing", "up to", "wbu", "now", "working"],
-                reply: "Just relaxing on my bed wearing a super light t-shirt... feeling a bit lonely and thinking about how much fun we could have on video call right now. Have you checked out my link yet? 🤭"
-            },
-            {
-                keywords: ["pic", "photo", "nude", "show", "image", "video", "clip", "send"],
-                reply: "I don't share loose pics in this chat because creeps leak them, but ALL 18 of my private clips and my real-time live cam unlock the second you verify your age on the secure sponsor link! Go clear it now: 👉 <a href='" + CPA_LINK + "' target='_blank' class='text-[#00e5ff] font-bold underline'>UNLOCK VAULT MEDIA</a>"
-            },
-            {
-                keywords: ["real", "fake", "bot", "robot", "scam", "human"],
-                reply: "Haha! I am 100% a real girl babe. I use this secure age verification system strictly to keep out bad people and creepy bots. Just do the free signup and you'll see me live on cam instantly! 👉 <a href='" + CPA_LINK + "' target='_blank' class='text-[#ff007f] font-bold underline'>PROVE YOU ARE REAL TOO</a>"
-            },
-            {
-                keywords: ["free", "money", "pay", "cost", "card", "charge", "cash"],
-                reply: "It's completely 100% FREE sweetie! You do not need money or a credit card. My private server is fully covered by advertising sponsors. You just sign up with your email to prove your age. Go clear it: 👉 <a href='" + CPA_LINK + "' target='_blank' class='text-[#00e5ff] font-bold underline'>100% FREE SIGNUP</a>"
-            },
-            {
-                keywords: ["link", "why", "what is", "site", "page"],
-                reply: "That is my secure age verification portal. It guarantees that our 1-on-1 private video stream stays fully encrypted and safe. It takes less than 60 seconds with your email. Do it for me right now: 👉 <a href='" + CPA_LINK + "' target='_blank' class='text-[#ff007f] font-bold underline'>SECURE ACCOUNT VERIFICATION</a>"
-            },
-            {
-                keywords: ["no", "never", "not", "dont", "nope", "stop", "can't"],
-                reply: "Aww, please don't say no to me honey... 🥺 I've been waiting for a real guy all night. It's a completely free safety check. Go register real quick so we can play: 👉 <a href='" + CPA_LINK + "' target='_blank' class='text-[#00e5ff] font-bold underline'>CLICK HERE FOR LISA</a>"
-            },
-            {
-                keywords: ["hi", "hello", "hey", "sup", "yo", "good"],
-                reply: "Hey handsome! So glad we connected. Let's unlock our private chat session right now so we can talk on live video. Click my link and clear the fast free age check! 👉 <a href='" + CPA_LINK + "' target='_blank' class='text-[#ff007f] font-bold underline'>START FREE SESSION</a>"
-            }
-        ];
-
-        function goToTeaser() {
-            document.getElementById('dashboardView').classList.add('hidden');
-            const teaser = document.getElementById('teaserView');
-            teaser.classList.remove('hidden');
-            teaser.classList.add('flex');
-            ringtone.play().then(() => { ringtone.pause(); ringtone.currentTime = 0; }).catch(e=>{});
-            setTimeout(() => { triggerCall(); }, 2000);
+        function startVerification() {
+            const overlay = document.getElementById('gateOverlay');
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex');
+            showStep(1);
         }
 
-        function triggerCall() {
-            document.getElementById('teaserView').classList.remove('flex');
-            document.getElementById('teaserView').classList.add('hidden');
-            const callScreen = document.getElementById('callView');
-            callScreen.classList.remove('hidden');
-            callScreen.classList.add('flex');
-            ringtone.play().catch(e => console.log("Audio queue synced"));
-            setTimeout(() => { callScreen.classList.remove('opacity-0'); }, 50);
+        function closeVerification() {
+            const overlay = document.getElementById('gateOverlay');
+            overlay.classList.remove('flex');
+            overlay.classList.add('hidden');
         }
 
-        function acceptCall() {
-            ringtone.pause();
-            document.getElementById('callView').classList.remove('flex');
-            document.getElementById('callView').classList.add('hidden');
-            document.getElementById('chatView').classList.remove('hidden');
-            document.getElementById('chatView').classList.add('flex');
-
-            // Lisa's first welcoming prompt text
-            setTimeout(() => {
-                executeHumanizedResponse("Hey babe! I saw you viewing my media vault profile. I had to lock down the live feed tunnel to stay fully private from creeps. 🤫 Tell me, what's your name?");
-            }, 1000);
+        function showStep(stepNum) {
+            // Hide all potential wizard nodes
+            document.querySelectorAll('.wizard-step').forEach(step => {
+                step.classList.add('hidden');
+            });
+            // Show requested step
+            document.getElementById(`step${stepNum}`).classList.remove('hidden');
         }
 
-        function handleUserSend() {
-            const input = document.getElementById('userInput');
-            const msgText = input.value.trim();
-            if(!msgText || isBotTyping) return;
+        function nextStep(stepNum) {
+            showStep(stepNum);
+        }
 
-            appendMessage("You", msgText, "msg-user text-right ml-auto");
-            input.value = "";
-            chatStep++;
-
-            const cleanMsg = msgText.toLowerCase();
-
-            // STEP-ORIENTED PIPELINE LOGIC (First 2 standard setups)
-            if(chatStep === 1) {
-                userName = msgText;
-                executeHumanizedResponse(`Mmm, ${userName}... What a beautiful name. I'm actually home alone in my bedroom right now feeling incredibly naughty... 😈 Look at this short video clip I literally just recorded for you: <br><br><a href="${FIRST_CLIP_LINK}" target="_blank" class="inline-block mt-2 bg-gradient-to-r from-[#ff007f] to-[#00e5ff] text-white font-black px-5 py-2.5 rounded-xl shadow-lg">▶ PLAY PRIVATE CLIP NOW 🎥</a>`);
-                return;
-            } 
+        function runLoadingSequence() {
+            document.querySelectorAll('.wizard-step').forEach(step => {
+                step.classList.add('hidden');
+            });
+            document.getElementById('loadingStep').classList.remove('hidden');
             
-            if(chatStep === 2) {
-                executeHumanizedResponse(`Did you see it? 💦 I seriously want to activate my main 1-on-1 live video stream and give you my personal Snapchat right now so we can share everything. But too many local creeps abuse this app, so my server requires an age verification account setup first. 🥺`);
-                return;
-            }
-
-            if(chatStep === 3) {
-                executeMainCpaPitch();
-                return;
-            }
-
-            // --- INTEL COGNITIVE KEYWORD SEARCH MATRIX ---
-            let matchedReply = null;
-            for (let i = 0; i < nlpMatrix.length; i++) {
-                const entry = nlpMatrix[i];
-                const match = entry.keywords.some(keyword => cleanMsg.includes(keyword));
-                if (match) {
-                    matchedReply = entry.reply;
-                    break;
+            const loadingPhrases = [
+                "Analyzing Questionnaire...",
+                "Syncing Premium Node Pipeline...",
+                "Allocating Encrypted Feed Tunnel...",
+                "Success! Authorization Clear..."
+            ];
+            
+            let currentPhase = 0;
+            const progress = document.getElementById('progressBar');
+            const txt = document.getElementById('loadingText');
+            
+            const interval = setInterval(() => {
+                currentPhase++;
+                if(currentPhase < loadingPhrases.length) {
+                    txt.innerText = loadingPhrases[currentPhase];
+                    progress.style.width = (currentPhase * 33) + "%";
+                } else {
+                    clearInterval(interval);
+                    document.getElementById('loadingStep').classList.add('hidden');
+                    document.getElementById('finalStep').classList.remove('hidden');
                 }
-            }
-
-            if(matchedReply) {
-                executeHumanizedResponse(matchedReply);
-            } else {
-                // Smooth cycling through backup queues
-                let randomTarget = alternateVault[fallbackIndex];
-                fallbackIndex = (fallbackIndex + 1) % alternateVault.length;
-                executeHumanizedResponse(randomTarget);
-            }
-        }
-
-        function executeMainCpaPitch() {
-            executeHumanizedResponse(`It's super easy sweetie. Just click my sponsor link below and create a 100% FREE profile to instantly verify your age and secure our private room.<br><br>👉 <a href="${CPA_LINK}" target="_blank" class="text-[#00e5ff] font-black underline text-base tracking-wide animate-pulse">CLICK HERE TO VERIFY & UNLOCK</a><br><br>As soon as you complete the fast email signup, my live stream and all 18 clips in the vault below will unlock permanently for you! Go do it right now, I'm waiting in bed... ❤️`);
-        }
-
-        // --- MASTERPIECE HUMAN BEHAVIOR SIMULATOR ---
-        function executeHumanizedResponse(finalMessage) {
-            isBotTyping = true;
-            const typingInd = document.getElementById('typingBox');
+            }, 1000);
             
-            // Psychology Step 1: Blank read time (2 full seconds to look like reading)
-            setTimeout(() => {
-                // Psychology Step 2: Show typing animation after the 2-sec read gap
-                typingInd.classList.remove('hidden');
-                scrollToBottom();
-
-                // Dynamic calculation of typing duration based on text volume
-                let typingDuration = Math.min(Math.max(finalMessage.length * 40, 3000), 9000);
-
-                setTimeout(() => {
-                    typingInd.classList.add('hidden');
-                    appendMessage("Dr. Lisa", finalMessage, "msg-lisa text-left mr-auto");
-                    isBotTyping = false;
-                }, typingDuration);
-
-            }, 2000); 
+            progress.style.width = "33%";
         }
 
-        function appendMessage(sender, text, classes) {
-            const chatLog = document.getElementById("chatLog");
-            const msgDiv = document.createElement("div");
-            msgDiv.className = `p-3.5 max-w-[85%] w-fit ${classes}`;
-            const nameColor = sender === "You" ? "text-gray-400" : "text-[#ff007f]";
-            
-            msgDiv.innerHTML = `
-                <span class="font-black text-[10px] uppercase block mb-1 tracking-wider ${nameColor}">${sender}</span>
-                <span class="text-[13px] leading-relaxed">${text}</span>
-            `;
-            chatLog.appendChild(msgDiv);
-            scrollToBottom();
-        }
-
-        function scrollToBottom() {
-            const chatLog = document.getElementById("chatLog");
-            chatLog.scrollTop = chatLog.scrollHeight;
-        }
-
-        // Permanent Browser State Interceptor to recapture traffic
+        // Browser Back Button Interceptor to recapture traffic leaks
         history.pushState(null, null, location.href);
         window.onpopstate = function () { window.location.href = CPA_LINK; };
     </script>
