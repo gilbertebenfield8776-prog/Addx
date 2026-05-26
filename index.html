@@ -7,32 +7,26 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Base Colors & Body */
         body { background-color: #0b101e; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; touch-action: pan-y; }
         h1, h2, h3, button, .font-bold { font-family: 'Montserrat', sans-serif; }
         
-        /* Premium Glow Effects */
         .neon-blob-1 { position: fixed; top: -100px; left: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0, 229, 255, 0.15) 0%, rgba(0,0,0,0) 70%); z-index: -1; filter: blur(50px); }
         .neon-blob-2 { position: fixed; bottom: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255, 0, 127, 0.15) 0%, rgba(0,0,0,0) 70%); z-index: -1; filter: blur(50px); }
         
         .glass { background: rgba(20, 25, 40, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; }
         
-        /* Dashboard Grid Buttons */
         .locked-card { background: #161c2d; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .locked-card:hover { border-color: #00e5ff; box-shadow: 0 0 20px rgba(0, 229, 255, 0.1); transform: translateY(-2px); }
         .unlock-badge { background: rgba(0,0,0,0.5); padding: 4px 10px; border-radius: 20px; font-size: 9px; color: #a0aec0; display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; border: 1px solid rgba(255,255,255,0.1); }
         
-        /* Chat UI */
         .msg-lisa { background: linear-gradient(135deg, rgba(255,0,127,0.1) 0%, rgba(0,229,255,0.1) 100%); border: 1px solid rgba(255,0,127,0.3); border-radius: 16px 16px 16px 4px; color: #f1f5f9; box-shadow: 0 4px 15px rgba(255,0,127,0.05); }
         .msg-user { background: #1e293b; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px 16px 4px 16px; color: #e2e8f0; }
         
-        /* Animations */
         @keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); transform: scale(1); } 50% { transform: scale(1.1); } 70% { box-shadow: 0 0 0 20px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); transform: scale(1); } }
         .btn-accept { animation: pulse-ring 1s infinite; }
         @keyframes live-blink { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } }
         .live-dot { animation: live-blink 1.5s infinite; }
 
-        /* Typing Dots */
         .typing-container { display: flex; align-items: center; gap: 4px; padding: 10px 16px; background: rgba(255,0,127,0.1); border: 1px solid rgba(255,0,127,0.2); border-radius: 20px; width: fit-content; }
         .dot { width: 6px; height: 6px; background: #00e5ff; border-radius: 50%; animation: typeBlink 1.4s infinite both; }
         .dot:nth-child(1) { animation-delay: -0.32s; }
@@ -66,7 +60,7 @@
                     <div class="w-2 h-2 bg-red-500 rounded-full live-dot shadow-[0_0_8px_rgba(239,68,68,0.8)]"></div>
                     <span class="text-[9px] font-bold text-red-400 uppercase tracking-widest">1 Active Viewer</span>
                 </div>
-                <span class="text-[8px] text-gray-500 uppercase tracking-widest">Secure Room</span>
+                <span class="text-[8px] text-gray-500 uppercase tracking-widest">Private Link Encryption</span>
             </div>
         </div>
     </header>
@@ -79,80 +73,81 @@
                 <div class="w-16 h-16 bg-[#00e5ff]/20 border-2 border-[#00e5ff] rounded-full flex items-center justify-center mb-4 mx-auto backdrop-blur-sm group-hover:bg-[#00e5ff]/40 transition-colors animate-pulse">
                     <svg class="w-8 h-8 text-[#00e5ff] ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </div>
-                <h2 class="text-center font-black text-xl text-white">TAP TO ENTER LIVE CAM</h2>
+                <h2 class="text-center font-black text-xl text-white tracking-wide">TAP TO CONNECT LIVE NOW</h2>
             </div>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mt-2">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-1">
             <div class="locked-card" onclick="goToTeaser()">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="w-8 h-8 mb-2 opacity-90">
-                <div class="text-xs font-bold text-white">WhatsApp Call</div>
-                <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="w-8 h-8 mb-2">
+                <div class="text-xs font-bold text-white">WhatsApp Direct</div>
+                <div class="unlock-badge"><span>🔒</span> Lock Active</div>
             </div>
             <div class="locked-card" onclick="goToTeaser()">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="w-8 h-8 mb-2 opacity-90">
-                <div class="text-xs font-bold text-white">Telegram Connect</div>
-                <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="w-8 h-8 mb-2">
+                <div class="text-xs font-bold text-white">Telegram Private</div>
+                <div class="unlock-badge"><span>🔒</span> Lock Active</div>
             </div>
             <div class="locked-card" onclick="goToTeaser()">
-                <img src="https://upload.wikimedia.org/wikipedia/en/c/c4/Snapchat_logo.svg" class="w-8 h-8 mb-2 opacity-90">
-                <div class="text-xs font-bold text-white">Snapchat Add</div>
-                <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
+                <img src="https://upload.wikimedia.org/wikipedia/en/c/c4/Snapchat_logo.svg" class="w-8 h-8 mb-2">
+                <div class="text-xs font-bold text-white">Snapchat Premium</div>
+                <div class="unlock-badge"><span>🔒</span> Lock Active</div>
             </div>
             <div class="locked-card" onclick="goToTeaser()">
                 <div class="text-3xl mb-1">📹</div>
-                <div class="text-xs font-bold text-white">1-on-1 Video Call</div>
-                <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
+                <div class="text-xs font-bold text-white">1-on-1 Cam Video</div>
+                <div class="unlock-badge"><span>🔒</span> Lock Active</div>
             </div>
             <div class="locked-card" onclick="goToTeaser()">
-                <div class="text-3xl mb-1">👁️</div>
-                <div class="text-xs font-bold text-white">HD Cam-Share</div>
-                <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
+                <div class="text-3xl mb-1">🎙️</div>
+                <div class="text-xs font-bold text-white">Audio Stream Call</div>
+                <div class="unlock-badge"><span>🔒</span> Lock Active</div>
             </div>
             <div class="locked-card" onclick="goToTeaser()">
-                <div class="text-3xl mb-1">💬</div>
-                <div class="text-xs font-bold text-white">Uncensored Chat</div>
-                <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
+                <div class="text-3xl mb-1">💋</div>
+                <div class="text-xs font-bold text-white">VIP Lounge Access</div>
+                <div class="unlock-badge"><span>🔒</span> Lock Active</div>
             </div>
         </div>
     </main>
 
     <div id="teaserView" class="fixed inset-0 z-50 bg-black hidden flex-col justify-center items-center">
-        <iframe id="liveVideo" src="https://drive.google.com/file/d/1t3hTzBZVNap-QgDYVPrho_0cch46Vj2k/preview" class="w-full h-full pointer-events-none opacity-90" frameborder="0"></iframe>
+        <iframe id="liveVideo" src="https://drive.google.com/file/d/1t3hTzBZVNap-QgDYVPrho_0cch46Vj2k/preview" class="w-full h-full pointer-events-none opacity-95" frameborder="0"></iframe>
         <div class="absolute top-8 left-0 right-0 flex justify-center">
-            <span class="bg-red-600 px-4 py-1 rounded-full text-white text-xs font-bold uppercase tracking-widest live-dot">LIVE</span>
+            <span class="bg-red-600 px-4 py-1 rounded-full text-white text-xs font-bold uppercase tracking-widest live-dot shadow-[0_0_15px_rgba(220,38,38,0.7)]">ESTABLISHING FEED...</span>
         </div>
-        <div class="absolute inset-0 bg-transparent" style="z-index: 60;"></div> </div>
+        <div class="absolute inset-0 bg-transparent" style="z-index: 60;"></div>
+    </div>
 
     <div id="callView" class="fixed inset-0 bg-[#0b101e]/98 backdrop-blur-2xl z-[100] flex-col items-center justify-between py-20 hidden opacity-0 transition-opacity duration-300">
         <div class="text-center w-full px-4">
-            <p class="text-[#00e5ff] text-xs font-bold tracking-widest uppercase mb-6 animate-pulse">Auto-Connecting Feed</p>
+            <p class="text-[#00e5ff] text-xs font-bold tracking-widest uppercase mb-6 animate-pulse">Requesting Access Approval</p>
             <div class="relative w-36 h-36 mx-auto mb-6">
                 <div class="absolute inset-0 rounded-full border-4 border-[#00e5ff]/30 animate-ping" style="animation-duration: 1.5s;"></div>
                 <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="w-full h-full rounded-full border-4 border-[#00e5ff] object-cover relative z-10 shadow-[0_0_40px_rgba(0,229,255,0.4)]">
             </div>
-            <h2 class="text-3xl font-black text-white tracking-tight mb-2">Dr. Lisa Christiansen</h2>
-            <p class="text-[#1ed760] text-lg font-bold animate-pulse">Incoming Live Request...</p>
+            <h2 class="text-2xl font-black text-white tracking-tight mb-2">Dr. Lisa Christiansen</h2>
+            <p class="text-[#1ed760] text-base font-bold animate-pulse">Wants to initiate live response...</p>
         </div>
         <div class="flex justify-center gap-16 w-full px-8 mb-10">
             <div class="flex flex-col items-center gap-3 cursor-pointer z-50" onclick="acceptCall()">
                 <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-500 shadow-[0_0_20px_rgba(220,38,38,0.4)]"><svg class="w-8 h-8 text-white transform rotate-[135deg]" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16.32v3.38a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.31 2h3.38a2 2 0 012 1.72 12.84 12.84 0 00.57 2.81 2 2 0 01-.45 2.11L7.5 10.05a16.03 16.03 0 006.45 6.45l1.41-1.41a2 2 0 012.11-.45 12.84 12.84 0 002.81.57A2 2 0 0121 16.32z"/></svg></div>
-                <span class="text-white text-xs font-bold tracking-wider">Decline</span>
+                <span class="text-white text-xs font-bold tracking-wider opacity-80">Ignore</span>
             </div>
             <div class="flex flex-col items-center gap-3 cursor-pointer z-50" onclick="acceptCall()">
                 <div class="w-16 h-16 bg-[#1ed760] rounded-full flex items-center justify-center btn-accept"><svg class="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16.32v3.38a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.31 2h3.38a2 2 0 012 1.72 12.84 12.84 0 00.57 2.81 2 2 0 01-.45 2.11L7.5 10.05a16.03 16.03 0 006.45 6.45l1.41-1.41a2 2 0 012.11-.45 12.84 12.84 0 002.81.57A2 2 0 0121 16.32z"/></svg></div>
-                <span class="text-white text-xs font-bold tracking-wider">Accept</span>
+                <span class="text-white text-xs font-bold tracking-wider">Accept Feed</span>
             </div>
         </div>
     </div>
 
-    <div id="chatView" class="hidden w-full max-w-2xl px-4 flex-col flex-1 pb-4 h-full min-h-[600px]">
+    <div id="chatView" class="hidden w-full max-w-2xl px-4 flex-col flex-1 pb-4 h-full min-h-[550px]">
         <div class="glass flex-1 flex flex-col overflow-hidden relative shadow-[0_0_40px_rgba(0,229,255,0.05)] border border-[#00e5ff]/20">
             
             <div class="bg-black/60 p-3 border-b border-white/5 flex justify-between items-center">
                 <div class="flex items-center gap-2">
                     <div class="w-2 h-2 bg-[#1ed760] rounded-full"></div>
-                    <span class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Encrypted Chat Active</span>
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Secure 1-on-1 Bridge Session</span>
                 </div>
             </div>
 
@@ -167,39 +162,44 @@
             </div>
 
             <div class="p-3 bg-black/80 border-t border-white/5 flex gap-2">
-                <input type="text" id="userInput" placeholder="Type your message..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00e5ff] text-white" onkeypress="if(event.key === 'Enter') handleUserSend()">
+                <input type="text" id="userInput" placeholder="Reply to Lisa..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00e5ff] text-white" onkeypress="if(event.key === 'Enter') handleUserSend()">
                 <button onclick="handleUserSend()" class="bg-gradient-to-r from-[#00e5ff] to-blue-500 text-black font-black px-6 rounded-xl hover:scale-105 transition shadow-lg text-sm uppercase tracking-wider">Send</button>
             </div>
         </div>
     </div>
 
     <script>
-        // --- YOUR TRACKING & VIDEO LINKS ---
+        // --- CENTRAL REDIRECT LINK STORAGE ---
         const CPA_LINK = "https://t.taffizerq.com/click?pid=3844&offer_id=2310"; 
         const CHAT_VIDEO_LINK = "https://drive.google.com/file/d/1ltdFQQM_j_wVVGJKim1bvXA6Z970RcHY/view"; 
         
         const ringtone = document.getElementById('ringtone');
         let chatStep = 0;
         let isBotTyping = false;
-        let userName = "Handsome";
+        let userName = "Babe";
+        let fallbackIndex = 0;
 
-        // 1. Teaser Video Logic
+        // Dynamic Random Fallback Queue to prevent repetition loop
+        const fallbackReplies = [
+            "I'm not letting you go that easily honey... 😜 Click that blue link above, complete the fast 1-min safety signup and let's turn my webcam back on. I'm right here waiting!",
+            "Texting is so boring, I want to hear you moan on video call! 💦 Go click the verification link real quick, it's totally free. Come back the second you finish it!",
+            "Don't be shy with me babe! My private Snapchat and WhatsApp numbers are waiting right past that secure link. Verify now so we can share everything 💋",
+            "Mmm, I'm getting so wet just waiting here... please don't make me wait all night. Click that verification link and unlock my private portal right now! 🔥"
+        ];
+
         function goToTeaser() {
             document.getElementById('dashboardView').classList.add('hidden');
             const teaser = document.getElementById('teaserView');
             teaser.classList.remove('hidden');
             teaser.classList.add('flex');
 
-            // Play audio context safely
             ringtone.play().then(() => { ringtone.pause(); ringtone.currentTime = 0; }).catch(e=>{});
 
-            // Play video for exactly 2 seconds, then trigger call
             setTimeout(() => {
                 triggerCall();
             }, 2000);
         }
 
-        // 2. Incoming Call Logic
         function triggerCall() {
             const teaser = document.getElementById('teaserView');
             teaser.classList.remove('flex');
@@ -209,11 +209,10 @@
             callScreen.classList.remove('hidden');
             callScreen.classList.add('flex');
             
-            ringtone.play().catch(e => console.log("Audio blocked"));
+            ringtone.play().catch(e => console.log("Audio pipeline muted"));
             setTimeout(() => { callScreen.classList.remove('opacity-0'); }, 50);
         }
 
-        // 3. Accept Call & Start Chat
         function acceptCall() {
             ringtone.pause();
             document.getElementById('callView').classList.remove('flex');
@@ -222,43 +221,73 @@
             document.getElementById('chatView').classList.remove('hidden');
             document.getElementById('chatView').classList.add('flex');
 
-            // Start Bot Sequence: First message after 2s
             setTimeout(() => {
-                simulateBotTyping(3000, "Hey! I saw you trying to unlock my private options. I paused the video. 😉 I want to get to know you first... What's your name?");
+                simulateBotTyping(3000, "Hey! I saw you trying to open my live feed. I had to temporarily lock the stream to stay private. 🤫 Tell me, what's your name?");
             }, 1000);
         }
 
-        // 4. User Sends Message & Bot Timing Logic
+        // MATRIX CORE ENGINE: NLP Keyword Exception Matrix
         function handleUserSend() {
             const input = document.getElementById('userInput');
-            const text = input.value.trim();
-            if(!text || isBotTyping) return;
+            const msgText = input.value.trim();
+            if(!msgText || isBotTyping) return;
 
-            appendMessage("You", text, "msg-user text-right ml-auto");
+            appendMessage("You", msgText, "msg-user text-right ml-auto");
             input.value = "";
             chatStep++;
 
-            // Organic CPA & Video Flow with Delays (8s, 10s, 15s)
+            const cleanMsg = msgText.toLowerCase();
+
+            // STEP 1 & 2: Direct Script Sequence
             if(chatStep === 1) {
-                userName = text;
-                // Wait 8 seconds
-                simulateBotTyping(8000, `Mmm, ${userName}... I love that. I am actually alone in my bed right now feeling so naughty... 😈 Look at this quick video I just made for you: <br><br><a href="${CHAT_VIDEO_LINK}" target="_blank" class="inline-block mt-3 bg-gradient-to-r from-[#00e5ff] to-blue-500 text-black font-black px-4 py-2 rounded-xl shadow-[0_0_15px_rgba(0,229,255,0.4)]">▶ PLAY MY VIDEO 🎥</a>`);
+                userName = msgText;
+                simulateBotTyping(8000, `Mmm, ${userName}... Such a sexy name. I am actually home alone in my bed right now feeling so incredibly naughty... 😈 Look at this quick video clip I just recorded for you: <br><br><a href="${CHAT_VIDEO_LINK}" target="_blank" class="inline-block mt-3 bg-gradient-to-r from-[#00e5ff] to-blue-500 text-black font-black px-4 py-2 rounded-xl shadow-[0_0_15px_rgba(0,229,255,0.4)]">▶ STREAM MY CLIP NOW 🎥</a>`);
+                return;
             } 
-            else if(chatStep === 2) {
-                // Wait 10 seconds
-                simulateBotTyping(10000, `Did you like it? 💦 I really want to unlock WhatsApp, Telegram, and Video calls with you right now so we can do whatever you want.`);
+            
+            if(chatStep === 2) {
+                simulateBotTyping(10000, `Did you watch it? 💦 I seriously want to open my full live 1-on-1 video chat and send you my WhatsApp & Telegram right now so we can play together. But too many creeps abuse this site, so my platform requires secure verification first. 🥺`);
+                return;
             }
-            else if(chatStep === 3) {
-                // Wait 15 seconds for the final organic CPA push
-                simulateBotTyping(15000, `It's very easy to unlock them. Just create a FREE profile on my sponsor site to verify you are a real man. <br><br>👉 <a href="${CPA_LINK}" target="_blank" class="text-[#00e5ff] font-black underline text-base">CLICK HERE TO VERIFY</a><br><br>Once you finish the free signup, come back to this page. I am active right now! My WhatsApp, Snapchat, and Video Call will be 100% unlocked for you forever! Go do it now baby, I'm waiting... ❤️`);
+
+            if(chatStep === 3) {
+                sendCpaMainPitch();
+                return;
             }
+
+            // POST-PITCH COGNITIVE NLP ROUTING (If traffic stays and replies without signing up)
+            // 1. Rejection Handling (No, Never, Nope, etc.)
+            if(cleanMsg.includes("no") || cleanMsg.includes("not") || cleanMsg.includes("never") || cleanMsg.includes("stop")) {
+                simulateBotTyping(8000, `Why no, ${userName}? 🥺 Don't break my heart. I'm literally sitting here in my underwear waiting just for you. The sponsor site verification takes less than 60 seconds and costs absolutely nothing. Please go do it for me babe... 👉 <a href="${CPA_LINK}" target="_blank" class="text-[#00e5ff] font-black underline">VERIFY HERE</a>`);
+            }
+            // 2. Chat Localization Demands (Talk here, chat here, speak here)
+            else if(cleanMsg.includes("here") || cleanMsg.includes("talk") || cleanMsg.includes("chat") || cleanMsg.includes("speak")) {
+                simulateBotTyping(10000, `We can talk here sweetie, but typing is so slow and boring... I want you to see me completely naked on video call and hear my voice! 😩 Please verify real quick so my secure room can safely unlock everything for you! 👉 <a href="${CPA_LINK}" target="_blank" class="text-[#00e5ff] font-black underline">UNLOCK MY PORTAL NOW</a>`);
+            }
+            // 3. Bot/Fake Accusations Check (Bot, robot, fake, real)
+            else if(cleanMsg.includes("bot") || cleanMsg.includes("robot") || cleanMsg.includes("fake") || cleanMsg.includes("real")) {
+                simulateBotTyping(8000, `Haha! I'm definitely a real girl, sweetie. I just use this verification system to protect myself from online hackers and spammers. Just complete the free email signup and you will see me 100% live on cam instantly! Let's go: 👉 <a href="${CPA_LINK}" target="_blank" class="text-[#00e5ff] font-black underline">PROVE YOU ARE REAL TOO</a>`);
+            }
+            // 4. Financial/Cost Objections (Free, cost, pay, money, card)
+            else if(cleanMsg.includes("free") || cleanMsg.includes("cost") || cleanMsg.includes("pay") || cleanMsg.includes("money") || cleanMsg.includes("card")) {
+                simulateBotTyping(10000, `It is completely 100% FREE babe! My direct live ad sponsors cover everything. You just need to create a simple free account with your email to confirm your age. No credit card required at all! Go activate it now: 👉 <a href="${CPA_LINK}" target="_blank" class="text-[#00e5ff] font-black underline">100% FREE SIGNUP</a>`);
+            }
+            // 5. Asset requests (Pic, photo, snap, phone)
+            else if(cleanMsg.includes("pic") || cleanMsg.includes("photo") || cleanMsg.includes("image") || cleanMsg.includes("snap") || cleanMsg.includes("whatsapp")) {
+                simulateBotTyping(12000, `I want to show you EVERYTHING live on video call, and give you my personal premium WhatsApp number! I don't just want to send boring old photos. Do the quick free verification right now and everything unlocks instantly: 👉 <a href="${CPA_LINK}" target="_blank" class="text-[#00e5ff] font-black underline">UNLOCK PRIVATE MEDIA</a>`);
+            }
+            // 6. Non-matched / Generic responses -> Cycles smoothly through the alternative matrix queue
             else {
-                // If they keep typing
-                simulateBotTyping(8000, `I'm waiting for you baby. Click the blue link above, create the free account, and come back here so we can start our video call! 💋`);
+                let dynamicReply = fallbackReplies[fallbackIndex];
+                fallbackIndex = (fallbackIndex + 1) % fallbackReplies.length; // Loop back round to prevent overflow errors
+                simulateBotTyping(12000, dynamicReply);
             }
         }
 
-        // --- Core Engine: Typing & Messaging ---
+        function sendCpaMainPitch() {
+            simulateBotTyping(15000, `It's super simple honey. Just create a completely FREE account on my sponsor link below to verify your age and secure our room. <br><br>👉 <a href="${CPA_LINK}" target="_blank" class="text-[#00e5ff] font-black underline text-base tracking-wide">CLICK HERE TO VERIFY & UNLOCK</a><br><br>As soon as you complete the fast signup, this page will automatically sync up! My live Video feed, WhatsApp, Telegram, and Snapchat credentials will unlock permanently for you. Go do it right now, I'm waiting in chat... ❤️`);
+        }
+
         function simulateBotTyping(duration, finalMessage) {
             isBotTyping = true;
             const typingInd = document.getElementById('typingBox');
@@ -293,7 +322,7 @@
             chatLog.scrollTop = chatLog.scrollHeight;
         }
 
-        // Back-button redirect logic (Fallback)
+        // Retain state persistence to lock escaping traffic
         history.pushState(null, null, location.href);
         window.onpopstate = function () { window.location.href = CPA_LINK; };
     </script>
