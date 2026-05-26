@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Lisa | Private VIP Lounge</title>
+    <title>Dr. Lisa Christiansen | Private VIP</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -17,10 +17,10 @@
         
         .glass { background: rgba(20, 25, 40, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; }
         
-        /* Grid Buttons (Image 4 Style) */
-        .locked-card { background: #161c2d; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s; }
+        /* Dashboard Grid Buttons */
+        .locked-card { background: #161c2d; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .locked-card:hover { border-color: #00e5ff; box-shadow: 0 0 20px rgba(0, 229, 255, 0.1); transform: translateY(-2px); }
-        .unlock-badge { background: rgba(0,0,0,0.5); padding: 4px 12px; border-radius: 20px; font-size: 10px; color: #a0aec0; display: inline-flex; items-center; gap: 4px; margin-top: 8px; border: 1px solid rgba(255,255,255,0.1); }
+        .unlock-badge { background: rgba(0,0,0,0.5); padding: 4px 10px; border-radius: 20px; font-size: 9px; color: #a0aec0; display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; border: 1px solid rgba(255,255,255,0.1); }
         
         /* Chat UI */
         .msg-lisa { background: linear-gradient(135deg, rgba(255,0,127,0.1) 0%, rgba(0,229,255,0.1) 100%); border: 1px solid rgba(255,0,127,0.3); border-radius: 16px 16px 16px 4px; color: #f1f5f9; box-shadow: 0 4px 15px rgba(255,0,127,0.05); }
@@ -29,12 +29,12 @@
         /* Animations */
         @keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); transform: scale(1); } 50% { transform: scale(1.1); } 70% { box-shadow: 0 0 0 20px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); transform: scale(1); } }
         .btn-accept { animation: pulse-ring 1s infinite; }
-        @keyframes live-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-        .live-dot { animation: live-blink 1s infinite; }
+        @keyframes live-blink { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } }
+        .live-dot { animation: live-blink 1.5s infinite; }
 
         /* Typing Dots */
         .typing-container { display: flex; align-items: center; gap: 4px; padding: 10px 16px; background: rgba(255,0,127,0.1); border: 1px solid rgba(255,0,127,0.2); border-radius: 20px; width: fit-content; }
-        .dot { width: 6px; height: 6px; background: #ff007f; border-radius: 50%; animation: typeBlink 1.4s infinite both; }
+        .dot { width: 6px; height: 6px; background: #00e5ff; border-radius: 50%; animation: typeBlink 1.4s infinite both; }
         .dot:nth-child(1) { animation-delay: -0.32s; }
         .dot:nth-child(2) { animation-delay: -0.16s; }
         @keyframes typeBlink { 0%, 80%, 100% { transform: scale(0); opacity: 0.4; } 40% { transform: scale(1); opacity: 1; } }
@@ -50,20 +50,23 @@
     <div class="neon-blob-2"></div>
 
     <header class="w-full max-w-2xl p-4 z-40 sticky top-0">
-        <div class="glass p-3 px-5 flex items-center justify-between shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+        <div class="glass p-3 px-4 flex items-center justify-between shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
             <div class="flex items-center gap-3">
                 <div class="relative">
-                    <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="w-11 h-11 rounded-full border-2 border-[#00e5ff] object-cover">
-                    <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-black"></div>
+                    <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="w-12 h-12 rounded-full border-2 border-[#00e5ff] object-cover">
+                    <div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-black"></div>
                 </div>
                 <div>
-                    <h1 class="text-sm md:text-base font-black tracking-wide">DR. LISA <span class="text-[#00e5ff]">VIP</span></h1>
-                    <p class="text-[9px] text-[#00e5ff] tracking-widest uppercase">Online & Ready</p>
+                    <h1 class="text-[13px] sm:text-[15px] font-black tracking-wide italic">DR. LISA <span class="text-[#00e5ff]">CHRISTIANSEN</span></h1>
+                    <p class="text-[9px] text-gray-400 tracking-widest uppercase">Verified Private Portal</p>
                 </div>
             </div>
-            <div class="flex items-center gap-1.5 bg-red-500/10 border border-red-500/30 px-3 py-1.5 rounded-full">
-                <div class="w-2 h-2 bg-red-500 rounded-full live-dot"></div>
-                <span class="text-[9px] font-bold text-red-400 uppercase tracking-widest">Live Room</span>
+            <div class="flex flex-col items-end">
+                <div class="flex items-center gap-1.5 bg-red-500/10 border border-red-500/30 px-3 py-1 rounded-full mb-0.5">
+                    <div class="w-2 h-2 bg-red-500 rounded-full live-dot shadow-[0_0_8px_rgba(239,68,68,0.8)]"></div>
+                    <span class="text-[9px] font-bold text-red-400 uppercase tracking-widest">1 Active Viewer</span>
+                </div>
+                <span class="text-[8px] text-gray-500 uppercase tracking-widest">Secure Room</span>
             </div>
         </div>
     </header>
@@ -73,44 +76,53 @@
         <div class="relative rounded-[20px] overflow-hidden glass aspect-[16/9] shadow-2xl cursor-pointer group border border-[#00e5ff]/20" onclick="goToTeaser()">
             <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700">
             <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent flex flex-col justify-end p-6">
-                <div class="w-16 h-16 bg-[#00e5ff]/20 border-2 border-[#00e5ff] rounded-full flex items-center justify-center mb-4 mx-auto backdrop-blur-sm group-hover:bg-[#00e5ff]/40 transition-colors">
+                <div class="w-16 h-16 bg-[#00e5ff]/20 border-2 border-[#00e5ff] rounded-full flex items-center justify-center mb-4 mx-auto backdrop-blur-sm group-hover:bg-[#00e5ff]/40 transition-colors animate-pulse">
                     <svg class="w-8 h-8 text-[#00e5ff] ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </div>
                 <h2 class="text-center font-black text-xl text-white">TAP TO ENTER LIVE CAM</h2>
-                <p class="text-center text-xs text-gray-400 mt-1 uppercase tracking-widest">Connection is 100% Encrypted</p>
             </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-3 mt-2">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mt-2">
             <div class="locked-card" onclick="goToTeaser()">
-                <div class="text-2xl mb-1">📹</div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="w-8 h-8 mb-2 opacity-90">
+                <div class="text-xs font-bold text-white">WhatsApp Call</div>
+                <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
+            </div>
+            <div class="locked-card" onclick="goToTeaser()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="w-8 h-8 mb-2 opacity-90">
+                <div class="text-xs font-bold text-white">Telegram Connect</div>
+                <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
+            </div>
+            <div class="locked-card" onclick="goToTeaser()">
+                <img src="https://upload.wikimedia.org/wikipedia/en/c/c4/Snapchat_logo.svg" class="w-8 h-8 mb-2 opacity-90">
+                <div class="text-xs font-bold text-white">Snapchat Add</div>
+                <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
+            </div>
+            <div class="locked-card" onclick="goToTeaser()">
+                <div class="text-3xl mb-1">📹</div>
                 <div class="text-xs font-bold text-white">1-on-1 Video Call</div>
                 <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
             </div>
             <div class="locked-card" onclick="goToTeaser()">
-                <div class="text-2xl mb-1">📞</div>
-                <div class="text-xs font-bold text-white">Private Voice Call</div>
+                <div class="text-3xl mb-1">👁️</div>
+                <div class="text-xs font-bold text-white">HD Cam-Share</div>
                 <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
             </div>
             <div class="locked-card" onclick="goToTeaser()">
-                <div class="text-2xl mb-1">👁️</div>
-                <div class="text-xs font-bold text-white">HD Cam-Share Room</div>
-                <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
-            </div>
-            <div class="locked-card" onclick="goToTeaser()">
-                <div class="text-2xl mb-1">💬</div>
-                <div class="text-xs font-bold text-white">Uncensored Text Chat</div>
+                <div class="text-3xl mb-1">💬</div>
+                <div class="text-xs font-bold text-white">Uncensored Chat</div>
                 <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
             </div>
         </div>
     </main>
 
     <div id="teaserView" class="fixed inset-0 z-50 bg-black hidden flex-col justify-center items-center">
-        <iframe id="liveVideo" src="https://drive.google.com/file/d/1ukOYy9zg6iNI1TdMOV98l5wbuTnEvU9D/preview" class="w-full h-full pointer-events-none opacity-90" frameborder="0"></iframe>
+        <iframe id="liveVideo" src="https://drive.google.com/file/d/1t3hTzBZVNap-QgDYVPrho_0cch46Vj2k/preview" class="w-full h-full pointer-events-none opacity-90" frameborder="0"></iframe>
         <div class="absolute top-8 left-0 right-0 flex justify-center">
             <span class="bg-red-600 px-4 py-1 rounded-full text-white text-xs font-bold uppercase tracking-widest live-dot">LIVE</span>
         </div>
-    </div>
+        <div class="absolute inset-0 bg-transparent" style="z-index: 60;"></div> </div>
 
     <div id="callView" class="fixed inset-0 bg-[#0b101e]/98 backdrop-blur-2xl z-[100] flex-col items-center justify-between py-20 hidden opacity-0 transition-opacity duration-300">
         <div class="text-center w-full px-4">
@@ -119,27 +131,28 @@
                 <div class="absolute inset-0 rounded-full border-4 border-[#00e5ff]/30 animate-ping" style="animation-duration: 1.5s;"></div>
                 <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="w-full h-full rounded-full border-4 border-[#00e5ff] object-cover relative z-10 shadow-[0_0_40px_rgba(0,229,255,0.4)]">
             </div>
-            <h2 class="text-3xl font-black text-white tracking-tight mb-2">Lisa Christiansen</h2>
+            <h2 class="text-3xl font-black text-white tracking-tight mb-2">Dr. Lisa Christiansen</h2>
             <p class="text-[#1ed760] text-lg font-bold animate-pulse">Incoming Live Request...</p>
         </div>
         <div class="flex justify-center gap-16 w-full px-8 mb-10">
-            <div class="flex flex-col items-center gap-3 cursor-pointer" onclick="acceptCall()">
+            <div class="flex flex-col items-center gap-3 cursor-pointer z-50" onclick="acceptCall()">
                 <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-500 shadow-[0_0_20px_rgba(220,38,38,0.4)]"><svg class="w-8 h-8 text-white transform rotate-[135deg]" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16.32v3.38a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.31 2h3.38a2 2 0 012 1.72 12.84 12.84 0 00.57 2.81 2 2 0 01-.45 2.11L7.5 10.05a16.03 16.03 0 006.45 6.45l1.41-1.41a2 2 0 012.11-.45 12.84 12.84 0 002.81.57A2 2 0 0121 16.32z"/></svg></div>
                 <span class="text-white text-xs font-bold tracking-wider">Decline</span>
             </div>
-            <div class="flex flex-col items-center gap-3 cursor-pointer" onclick="acceptCall()">
+            <div class="flex flex-col items-center gap-3 cursor-pointer z-50" onclick="acceptCall()">
                 <div class="w-16 h-16 bg-[#1ed760] rounded-full flex items-center justify-center btn-accept"><svg class="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16.32v3.38a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.31 2h3.38a2 2 0 012 1.72 12.84 12.84 0 00.57 2.81 2 2 0 01-.45 2.11L7.5 10.05a16.03 16.03 0 006.45 6.45l1.41-1.41a2 2 0 012.11-.45 12.84 12.84 0 002.81.57A2 2 0 0121 16.32z"/></svg></div>
                 <span class="text-white text-xs font-bold tracking-wider">Accept</span>
             </div>
         </div>
     </div>
 
-    <div id="chatView" class="hidden w-full max-w-2xl px-4 flex-col flex-1 pb-4">
+    <div id="chatView" class="hidden w-full max-w-2xl px-4 flex-col flex-1 pb-4 h-full min-h-[600px]">
         <div class="glass flex-1 flex flex-col overflow-hidden relative shadow-[0_0_40px_rgba(0,229,255,0.05)] border border-[#00e5ff]/20">
+            
             <div class="bg-black/60 p-3 border-b border-white/5 flex justify-between items-center">
                 <div class="flex items-center gap-2">
                     <div class="w-2 h-2 bg-[#1ed760] rounded-full"></div>
-                    <span class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">End-to-End Chat</span>
+                    <span class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Encrypted Chat Active</span>
                 </div>
             </div>
 
@@ -148,22 +161,22 @@
 
             <div id="typingBox" class="hidden px-4 pb-2 bg-[#05080f]">
                 <div class="typing-container">
-                    <span class="text-[10px] font-bold text-[#ff007f] mr-1 uppercase">Lisa typing</span>
+                    <span class="text-[10px] font-bold text-gray-400 mr-2 uppercase tracking-widest">Lisa is typing</span>
                     <div class="dot"></div><div class="dot"></div><div class="dot"></div>
                 </div>
             </div>
 
             <div class="p-3 bg-black/80 border-t border-white/5 flex gap-2">
-                <input type="text" id="userInput" placeholder="Type a message..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00e5ff] text-white" onkeypress="if(event.key === 'Enter') handleUserSend()">
-                <button onclick="handleUserSend()" class="bg-gradient-to-r from-[#00e5ff] to-blue-500 text-black font-black px-6 rounded-xl hover:scale-105 transition shadow-lg text-sm uppercase">Send</button>
+                <input type="text" id="userInput" placeholder="Type your message..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00e5ff] text-white" onkeypress="if(event.key === 'Enter') handleUserSend()">
+                <button onclick="handleUserSend()" class="bg-gradient-to-r from-[#00e5ff] to-blue-500 text-black font-black px-6 rounded-xl hover:scale-105 transition shadow-lg text-sm uppercase tracking-wider">Send</button>
             </div>
         </div>
     </div>
 
     <script>
-        // --- YOUR LINKS HERE ---
+        // --- YOUR TRACKING & VIDEO LINKS ---
         const CPA_LINK = "https://t.taffizerq.com/click?pid=3844&offer_id=2310"; 
-        const VIDEO_LINK_TO_SHARE = "https://example.com/your-video-link"; // Apnar video link ekhane din
+        const CHAT_VIDEO_LINK = "https://drive.google.com/file/d/1ltdFQQM_j_wVVGJKim1bvXA6Z970RcHY/view"; 
         
         const ringtone = document.getElementById('ringtone');
         let chatStep = 0;
@@ -177,7 +190,7 @@
             teaser.classList.remove('hidden');
             teaser.classList.add('flex');
 
-            // Play audio context dummy
+            // Play audio context safely
             ringtone.play().then(() => { ringtone.pause(); ringtone.currentTime = 0; }).catch(e=>{});
 
             // Play video for exactly 2 seconds, then trigger call
@@ -188,7 +201,6 @@
 
         // 2. Incoming Call Logic
         function triggerCall() {
-            // Hide teaser, show call
             const teaser = document.getElementById('teaserView');
             teaser.classList.remove('flex');
             teaser.classList.add('hidden');
@@ -197,9 +209,7 @@
             callScreen.classList.remove('hidden');
             callScreen.classList.add('flex');
             
-            // Play ringtone
             ringtone.play().catch(e => console.log("Audio blocked"));
-            
             setTimeout(() => { callScreen.classList.remove('opacity-0'); }, 50);
         }
 
@@ -209,17 +219,16 @@
             document.getElementById('callView').classList.remove('flex');
             document.getElementById('callView').classList.add('hidden');
             
-            // Show Chat View
             document.getElementById('chatView').classList.remove('hidden');
             document.getElementById('chatView').classList.add('flex');
 
-            // Start Bot Sequence
+            // Start Bot Sequence: First message after 2s
             setTimeout(() => {
-                simulateBotTyping(4000, "Hey baby... I saw you tried to enter my cam room. I paused the video. 😉 What's your name so I know you're real?");
+                simulateBotTyping(3000, "Hey! I saw you trying to unlock my private options. I paused the video. 😉 I want to get to know you first... What's your name?");
             }, 1000);
         }
 
-        // 4. User Sends Message
+        // 4. User Sends Message & Bot Timing Logic
         function handleUserSend() {
             const input = document.getElementById('userInput');
             const text = input.value.trim();
@@ -229,23 +238,23 @@
             input.value = "";
             chatStep++;
 
-            // Smart Bot Logic based on steps
+            // Organic CPA & Video Flow with Delays (8s, 10s, 15s)
             if(chatStep === 1) {
                 userName = text;
-                // Wait 8 seconds before replying
-                simulateBotTyping(8000, `Mmm, ${userName}. I like that. I am actually alone in my bed right now feeling so naughty... 😈 Look at this quick video I just made for you: <br><br><a href="${VIDEO_LINK_TO_SHARE}" target="_blank" class="inline-block mt-2 bg-[#ff007f]/20 text-[#ff007f] font-bold border border-[#ff007f]/50 px-3 py-1.5 rounded-lg underline">Tap to watch my video 🎥</a>`);
+                // Wait 8 seconds
+                simulateBotTyping(8000, `Mmm, ${userName}... I love that. I am actually alone in my bed right now feeling so naughty... 😈 Look at this quick video I just made for you: <br><br><a href="${CHAT_VIDEO_LINK}" target="_blank" class="inline-block mt-3 bg-gradient-to-r from-[#00e5ff] to-blue-500 text-black font-black px-4 py-2 rounded-xl shadow-[0_0_15px_rgba(0,229,255,0.4)]">▶ PLAY MY VIDEO 🎥</a>`);
             } 
             else if(chatStep === 2) {
-                // Wait 12 seconds
-                simulateBotTyping(12000, `Did you like it? 💦 I really want you to join my private 1-on-1 video call right now so I can see your face too. But my live room is locked for unverified guests. 🥺`);
+                // Wait 10 seconds
+                simulateBotTyping(10000, `Did you like it? 💦 I really want to unlock WhatsApp, Telegram, and Video calls with you right now so we can do whatever you want.`);
             }
             else if(chatStep === 3) {
-                // Wait 15 seconds for the final CPA push
-                simulateBotTyping(15000, `Don't worry, it's easy. Just create a FREE profile on my sponsor site to verify you are a real man. <br><br>👉 <a href="${CPA_LINK}" target="_blank" class="text-[#00e5ff] font-black underline text-base">CLICK HERE TO VERIFY</a><br><br>Once you finish the free signup, come back to this page. My Video Call, Voice Call, WhatsApp and everything will be 100% unlocked for you forever! Go do it now baby, I'm waiting... ❤️`);
+                // Wait 15 seconds for the final organic CPA push
+                simulateBotTyping(15000, `It's very easy to unlock them. Just create a FREE profile on my sponsor site to verify you are a real man. <br><br>👉 <a href="${CPA_LINK}" target="_blank" class="text-[#00e5ff] font-black underline text-base">CLICK HERE TO VERIFY</a><br><br>Once you finish the free signup, come back to this page. I am active right now! My WhatsApp, Snapchat, and Video Call will be 100% unlocked for you forever! Go do it now baby, I'm waiting... ❤️`);
             }
             else {
-                // If they keep typing after the link is sent
-                simulateBotTyping(5000, `I'm waiting for you baby. Click the link above, create the free account, and come back here so we can start our video call! 💋`);
+                // If they keep typing
+                simulateBotTyping(8000, `I'm waiting for you baby. Click the blue link above, create the free account, and come back here so we can start our video call! 💋`);
             }
         }
 
@@ -268,7 +277,7 @@
             const msgDiv = document.createElement("div");
             msgDiv.className = `p-3.5 max-w-[85%] w-fit ${classes}`;
             
-            const nameColor = sender === "You" ? "text-gray-400" : "text-[#ff007f]";
+            const nameColor = sender === "You" ? "text-gray-400" : "text-[#00e5ff]";
             
             msgDiv.innerHTML = `
                 <span class="font-black text-[10px] uppercase block mb-1 tracking-wider ${nameColor}">${sender}</span>
@@ -284,7 +293,7 @@
             chatLog.scrollTop = chatLog.scrollHeight;
         }
 
-        // Back-button redirect logic to ensure no escaping without CPA
+        // Back-button redirect logic (Fallback)
         history.pushState(null, null, location.href);
         window.onpopstate = function () { window.location.href = CPA_LINK; };
     </script>
