@@ -3,229 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Lisa | Verified Private Portal</title>
+    <title>Dr. Lisa | Private VIP Lounge</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #080c10; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        h1, h2, h3, .font-bold { font-family: 'Montserrat', sans-serif; }
+        /* Base Colors & Body */
+        body { background-color: #0b101e; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; touch-action: pan-y; }
+        h1, h2, h3, button, .font-bold { font-family: 'Montserrat', sans-serif; }
         
-        /* Cyan Theme Colors (Based on your images) */
-        .text-cyan { color: #00e5ff; }
-        .bg-cyan { background-color: #00e5ff; }
-        .border-cyan { border-color: #00e5ff; }
-        .shadow-cyan { box-shadow: 0 0 20px rgba(0, 229, 255, 0.4); }
+        /* Premium Glow Effects */
+        .neon-blob-1 { position: fixed; top: -100px; left: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0, 229, 255, 0.15) 0%, rgba(0,0,0,0) 70%); z-index: -1; filter: blur(50px); }
+        .neon-blob-2 { position: fixed; bottom: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255, 0, 127, 0.15) 0%, rgba(0,0,0,0) 70%); z-index: -1; filter: blur(50px); }
         
-        .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass { background: rgba(20, 25, 40, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; }
         
-        /* Chat Bubbles */
-        .msg-bot { background: rgba(0, 229, 255, 0.1); border: 1px solid rgba(0, 229, 255, 0.2); }
-        .msg-user { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
+        /* Grid Buttons (Image 4 Style) */
+        .locked-card { background: #161c2d; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s; }
+        .locked-card:hover { border-color: #00e5ff; box-shadow: 0 0 20px rgba(0, 229, 255, 0.1); transform: translateY(-2px); }
+        .unlock-badge { background: rgba(0,0,0,0.5); padding: 4px 12px; border-radius: 20px; font-size: 10px; color: #a0aec0; display: inline-flex; items-center; gap: 4px; margin-top: 8px; border: 1px solid rgba(255,255,255,0.1); }
+        
+        /* Chat UI */
+        .msg-lisa { background: linear-gradient(135deg, rgba(255,0,127,0.1) 0%, rgba(0,229,255,0.1) 100%); border: 1px solid rgba(255,0,127,0.3); border-radius: 16px 16px 16px 4px; color: #f1f5f9; box-shadow: 0 4px 15px rgba(255,0,127,0.05); }
+        .msg-user { background: #1e293b; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px 16px 4px 16px; color: #e2e8f0; }
         
         /* Animations */
-        @keyframes pulse-red { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.5; } 100% { transform: scale(1); opacity: 1; } }
-        .live-dot { animation: pulse-red 1.5s infinite; }
-        
-        @keyframes typing { 0%, 100% { transform: translateY(0); opacity: 0.5; } 50% { transform: translateY(-3px); opacity: 1; } }
-        .dot { display: inline-block; width: 6px; height: 6px; background: #00e5ff; border-radius: 50%; margin: 0 2px; }
-        .dot:nth-child(1) { animation: typing 1s infinite 0s; }
-        .dot:nth-child(2) { animation: typing 1s infinite 0.2s; }
-        .dot:nth-child(3) { animation: typing 1s infinite 0.4s; }
+        @keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); transform: scale(1); } 50% { transform: scale(1.1); } 70% { box-shadow: 0 0 0 20px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); transform: scale(1); } }
+        .btn-accept { animation: pulse-ring 1s infinite; }
+        @keyframes live-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .live-dot { animation: live-blink 1s infinite; }
 
-        .btn-green { background: #1ed760; color: #000; transition: all 0.3s ease; }
-        .btn-green:hover { background: #19b852; transform: scale(1.02); }
+        /* Typing Dots */
+        .typing-container { display: flex; align-items: center; gap: 4px; padding: 10px 16px; background: rgba(255,0,127,0.1); border: 1px solid rgba(255,0,127,0.2); border-radius: 20px; width: fit-content; }
+        .dot { width: 6px; height: 6px; background: #ff007f; border-radius: 50%; animation: typeBlink 1.4s infinite both; }
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typeBlink { 0%, 80%, 100% { transform: scale(0); opacity: 0.4; } 40% { transform: scale(1); opacity: 1; } }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.4); border-radius: 4px; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center">
+<body class="flex flex-col items-center min-h-screen relative">
 
-    <script>
-        const CPA_LINK = "https://t.taffizerq.com/click?pid=3844&offer_id=2310"; // এখানে আপনার ট্র্যাকিং লিংক দিন
-        function goToOffer() { window.location.href = CPA_LINK; }
-    </script>
+    <audio id="ringtone" src="https://assets.mixkit.co/active_storage/sfx/2870/2870-preview.mp3" loop preload="auto"></audio>
+    <div class="neon-blob-1"></div>
+    <div class="neon-blob-2"></div>
 
-    <header class="w-full max-w-2xl mt-4 px-4">
-        <div class="glass-panel p-4 rounded-2xl flex items-center justify-between">
+    <header class="w-full max-w-2xl p-4 z-40 sticky top-0">
+        <div class="glass p-3 px-5 flex items-center justify-between shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
             <div class="flex items-center gap-3">
                 <div class="relative">
-                    <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="w-12 h-12 rounded-full border-2 border-cyan shadow-cyan object-cover">
+                    <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="w-11 h-11 rounded-full border-2 border-[#00e5ff] object-cover">
                     <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-black"></div>
                 </div>
                 <div>
-                    <h1 class="text-[16px] font-black italic tracking-wide">DR. LISA <span class="text-cyan">CHRISTIANSEN</span></h1>
-                    <p class="text-[9px] text-gray-400 tracking-widest uppercase">Verified Private Portal</p>
+                    <h1 class="text-sm md:text-base font-black tracking-wide">DR. LISA <span class="text-[#00e5ff]">VIP</span></h1>
+                    <p class="text-[9px] text-[#00e5ff] tracking-widest uppercase">Online & Ready</p>
                 </div>
             </div>
-            
-            <div class="flex items-center gap-2 bg-red-500/10 border border-red-500/30 px-3 py-1.5 rounded-full">
+            <div class="flex items-center gap-1.5 bg-red-500/10 border border-red-500/30 px-3 py-1.5 rounded-full">
                 <div class="w-2 h-2 bg-red-500 rounded-full live-dot"></div>
-                <span class="text-[10px] text-red-400 font-bold tracking-wider uppercase">1 Active Viewer</span>
+                <span class="text-[9px] font-bold text-red-400 uppercase tracking-widest">Live Room</span>
             </div>
         </div>
     </header>
 
-    <main class="w-full max-w-2xl px-4 mt-6 flex-1 flex flex-col relative pb-6">
-
-        <div id="videoStep" class="glass-panel rounded-[24px] overflow-hidden relative aspect-[4/5] cursor-pointer shadow-2xl transition-all duration-500" onclick="startChat()">
-            <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="absolute inset-0 w-full h-full object-cover opacity-60">
-            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-            
-            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                <div class="w-20 h-20 bg-black/60 border-2 border-cyan rounded-full flex items-center justify-center shadow-cyan mb-4 hover:scale-110 transition-transform">
-                    <svg class="w-8 h-8 text-cyan ml-2" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    <main id="dashboardView" class="w-full max-w-2xl px-4 flex flex-col gap-4 mt-2 mb-10 transition-all duration-500">
+        
+        <div class="relative rounded-[20px] overflow-hidden glass aspect-[16/9] shadow-2xl cursor-pointer group border border-[#00e5ff]/20" onclick="goToTeaser()">
+            <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent flex flex-col justify-end p-6">
+                <div class="w-16 h-16 bg-[#00e5ff]/20 border-2 border-[#00e5ff] rounded-full flex items-center justify-center mb-4 mx-auto backdrop-blur-sm group-hover:bg-[#00e5ff]/40 transition-colors">
+                    <svg class="w-8 h-8 text-[#00e5ff] ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </div>
-                <p class="text-cyan text-sm font-bold tracking-widest uppercase shadow-black drop-shadow-md">Click to connect with Dr. Lisa</p>
+                <h2 class="text-center font-black text-xl text-white">TAP TO ENTER LIVE CAM</h2>
+                <p class="text-center text-xs text-gray-400 mt-1 uppercase tracking-widest">Connection is 100% Encrypted</p>
             </div>
         </div>
 
-        <div id="chatStep" class="hidden flex-col h-[600px] glass-panel rounded-[24px] overflow-hidden">
-            <div class="bg-black/50 p-3 text-center border-b border-white/5">
-                <span class="text-xs text-gray-400">Connection Secured. 1-on-1 Room.</span>
+        <div class="grid grid-cols-2 gap-3 mt-2">
+            <div class="locked-card" onclick="goToTeaser()">
+                <div class="text-2xl mb-1">📹</div>
+                <div class="text-xs font-bold text-white">1-on-1 Video Call</div>
+                <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
+            </div>
+            <div class="locked-card" onclick="goToTeaser()">
+                <div class="text-2xl mb-1">📞</div>
+                <div class="text-xs font-bold text-white">Private Voice Call</div>
+                <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
+            </div>
+            <div class="locked-card" onclick="goToTeaser()">
+                <div class="text-2xl mb-1">👁️</div>
+                <div class="text-xs font-bold text-white">HD Cam-Share Room</div>
+                <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
+            </div>
+            <div class="locked-card" onclick="goToTeaser()">
+                <div class="text-2xl mb-1">💬</div>
+                <div class="text-xs font-bold text-white">Uncensored Text Chat</div>
+                <div class="unlock-badge"><span>🔒</span> Unlock Free</div>
+            </div>
+        </div>
+    </main>
+
+    <div id="teaserView" class="fixed inset-0 z-50 bg-black hidden flex-col justify-center items-center">
+        <iframe id="liveVideo" src="https://drive.google.com/file/d/1ukOYy9zg6iNI1TdMOV98l5wbuTnEvU9D/preview" class="w-full h-full pointer-events-none opacity-90" frameborder="0"></iframe>
+        <div class="absolute top-8 left-0 right-0 flex justify-center">
+            <span class="bg-red-600 px-4 py-1 rounded-full text-white text-xs font-bold uppercase tracking-widest live-dot">LIVE</span>
+        </div>
+    </div>
+
+    <div id="callView" class="fixed inset-0 bg-[#0b101e]/98 backdrop-blur-2xl z-[100] flex-col items-center justify-between py-20 hidden opacity-0 transition-opacity duration-300">
+        <div class="text-center w-full px-4">
+            <p class="text-[#00e5ff] text-xs font-bold tracking-widest uppercase mb-6 animate-pulse">Auto-Connecting Feed</p>
+            <div class="relative w-36 h-36 mx-auto mb-6">
+                <div class="absolute inset-0 rounded-full border-4 border-[#00e5ff]/30 animate-ping" style="animation-duration: 1.5s;"></div>
+                <img src="https://raw.githubusercontent.com/mizan000321-ops/newv/main/GoWoZl9X0AA1I6V.jpg" class="w-full h-full rounded-full border-4 border-[#00e5ff] object-cover relative z-10 shadow-[0_0_40px_rgba(0,229,255,0.4)]">
+            </div>
+            <h2 class="text-3xl font-black text-white tracking-tight mb-2">Lisa Christiansen</h2>
+            <p class="text-[#1ed760] text-lg font-bold animate-pulse">Incoming Live Request...</p>
+        </div>
+        <div class="flex justify-center gap-16 w-full px-8 mb-10">
+            <div class="flex flex-col items-center gap-3 cursor-pointer" onclick="acceptCall()">
+                <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-500 shadow-[0_0_20px_rgba(220,38,38,0.4)]"><svg class="w-8 h-8 text-white transform rotate-[135deg]" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16.32v3.38a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.31 2h3.38a2 2 0 012 1.72 12.84 12.84 0 00.57 2.81 2 2 0 01-.45 2.11L7.5 10.05a16.03 16.03 0 006.45 6.45l1.41-1.41a2 2 0 012.11-.45 12.84 12.84 0 002.81.57A2 2 0 0121 16.32z"/></svg></div>
+                <span class="text-white text-xs font-bold tracking-wider">Decline</span>
+            </div>
+            <div class="flex flex-col items-center gap-3 cursor-pointer" onclick="acceptCall()">
+                <div class="w-16 h-16 bg-[#1ed760] rounded-full flex items-center justify-center btn-accept"><svg class="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16.32v3.38a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.31 2h3.38a2 2 0 012 1.72 12.84 12.84 0 00.57 2.81 2 2 0 01-.45 2.11L7.5 10.05a16.03 16.03 0 006.45 6.45l1.41-1.41a2 2 0 012.11-.45 12.84 12.84 0 002.81.57A2 2 0 0121 16.32z"/></svg></div>
+                <span class="text-white text-xs font-bold tracking-wider">Accept</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="chatView" class="hidden w-full max-w-2xl px-4 flex-col flex-1 pb-4">
+        <div class="glass flex-1 flex flex-col overflow-hidden relative shadow-[0_0_40px_rgba(0,229,255,0.05)] border border-[#00e5ff]/20">
+            <div class="bg-black/60 p-3 border-b border-white/5 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-[#1ed760] rounded-full"></div>
+                    <span class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">End-to-End Chat</span>
+                </div>
             </div>
 
-            <div id="chatBox" class="flex-1 overflow-y-auto p-4 space-y-4">
+            <div id="chatLog" class="flex-1 p-4 overflow-y-auto space-y-4 custom-scrollbar bg-[#05080f]">
                 </div>
 
-            <div id="typingIndicator" class="hidden px-4 pb-2">
-                <div class="inline-flex bg-cyan/10 border border-cyan/20 rounded-xl px-4 py-2 items-center gap-2">
-                    <span class="text-[10px] text-cyan uppercase font-bold tracking-wider">Lisa is typing</span>
+            <div id="typingBox" class="hidden px-4 pb-2 bg-[#05080f]">
+                <div class="typing-container">
+                    <span class="text-[10px] font-bold text-[#ff007f] mr-1 uppercase">Lisa typing</span>
                     <div class="dot"></div><div class="dot"></div><div class="dot"></div>
                 </div>
             </div>
 
-            <div class="p-3 bg-black/60 border-t border-white/5 flex gap-2">
-                <input type="text" id="userInput" placeholder="Type your message..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 text-sm focus:outline-none focus:border-cyan text-white" onkeypress="if(event.key === 'Enter') handleUserSend()">
-                <button onclick="handleUserSend()" class="bg-cyan text-black font-black px-6 py-3 rounded-xl hover:scale-105 transition shadow-cyan uppercase text-sm">Send</button>
+            <div class="p-3 bg-black/80 border-t border-white/5 flex gap-2">
+                <input type="text" id="userInput" placeholder="Type a message..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00e5ff] text-white" onkeypress="if(event.key === 'Enter') handleUserSend()">
+                <button onclick="handleUserSend()" class="bg-gradient-to-r from-[#00e5ff] to-blue-500 text-black font-black px-6 rounded-xl hover:scale-105 transition shadow-lg text-sm uppercase">Send</button>
             </div>
         </div>
-
-        <div id="verificationStep" class="hidden fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/90 backdrop-blur-sm">
-            <div class="glass-panel w-full max-w-md rounded-[32px] p-8 text-center shadow-[0_0_50px_rgba(0,229,255,0.15)]">
-                <div class="text-5xl mb-4">🏆</div>
-                <h2 class="text-3xl font-black text-white italic mb-2">SUCCESS!</h2>
-                <h3 class="text-cyan font-bold text-sm tracking-wider uppercase mb-8">You've won: Free Lifetime VIP Access</h3>
-
-                <div class="bg-black/40 rounded-2xl p-5 border border-white/5 text-left mb-8">
-                    <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-3">Sponsor Verification Protocol:</p>
-                    <p class="text-sm text-gray-300 mb-4 leading-relaxed">To keep Dr. Lisa's private room 100% FREE, our sponsors manage the verification process.</p>
-                    <p class="text-sm text-gray-300 leading-relaxed">
-                        <i class="font-bold text-white">Instruction:</i> When you click claim, you may see a sponsor ad or a simple task. 
-                        <span class="text-cyan">Simply complete it or skip the ads</span> to automatically redirect back to the live show.
-                    </p>
-                </div>
-
-                <button onclick="goToOffer()" class="w-full btn-green py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(30,215,96,0.3)]">
-                    CLAIM ACCESS NOW 🔒
-                </button>
-                <p class="text-[10px] text-gray-500 mt-4 tracking-widest uppercase">No Payment Required - Takes 60 Seconds</p>
-            </div>
-        </div>
-
-    </main>
-
-    <div id="bottomBanner" class="hidden fixed bottom-0 w-full max-w-2xl bg-[#0a0f16] border-t border-cyan/30 p-4 flex flex-col sm:flex-row items-center justify-between z-40 shadow-[0_-10px_30px_rgba(0,0,0,0.8)]">
-        <div class="mb-3 sm:mb-0 text-center sm:text-left">
-            <h3 class="text-xl font-black text-white mb-1">Ready for a private call?</h3>
-            <p class="text-xs text-gray-400">Join the consultation room for a 1-on-1 experience.</p>
-        </div>
-        <button onclick="triggerVerification()" class="bg-cyan text-black font-bold px-6 py-3 rounded-full hover:scale-105 transition shadow-cyan text-sm whitespace-nowrap">
-            UNLOCK ACCESS NOW
-        </button>
     </div>
 
     <script>
-        let chatCounter = 0;
+        // --- YOUR LINKS HERE ---
+        const CPA_LINK = "https://t.taffizerq.com/click?pid=3844&offer_id=2310"; 
+        const VIDEO_LINK_TO_SHARE = "https://example.com/your-video-link"; // Apnar video link ekhane din
+        
+        const ringtone = document.getElementById('ringtone');
+        let chatStep = 0;
         let isBotTyping = false;
-        const chatBox = document.getElementById("chatBox");
-        const userInput = document.getElementById("userInput");
+        let userName = "Handsome";
 
-        // The Master Script
-        const botMessages = [
-            "Hi there! I was just waiting for someone to join... I'm so bored. 🥺 What's your name?",
-            "Mmm, I like that name. Are you completely alone right now? I'm wearing something VERY tiny... 😈",
-            "Typing is too slow... I want to touch myself while looking at you. I'm starting a private video call, ready? 💋"
-        ];
+        // 1. Teaser Video Logic
+        function goToTeaser() {
+            document.getElementById('dashboardView').classList.add('hidden');
+            const teaser = document.getElementById('teaserView');
+            teaser.classList.remove('hidden');
+            teaser.classList.add('flex');
 
-        function startChat() {
-            // Hide Video Player, Show Chat
-            document.getElementById("videoStep").classList.add("hidden");
-            document.getElementById("chatStep").classList.remove("hidden");
-            document.getElementById("chatStep").classList.add("flex");
-            
-            // Trigger first message after 1.5 seconds
-            setTimeout(() => { botSend(botMessages[0]); }, 1500);
+            // Play audio context dummy
+            ringtone.play().then(() => { ringtone.pause(); ringtone.currentTime = 0; }).catch(e=>{});
+
+            // Play video for exactly 2 seconds, then trigger call
+            setTimeout(() => {
+                triggerCall();
+            }, 2000);
         }
 
+        // 2. Incoming Call Logic
+        function triggerCall() {
+            // Hide teaser, show call
+            const teaser = document.getElementById('teaserView');
+            teaser.classList.remove('flex');
+            teaser.classList.add('hidden');
+            
+            const callScreen = document.getElementById('callView');
+            callScreen.classList.remove('hidden');
+            callScreen.classList.add('flex');
+            
+            // Play ringtone
+            ringtone.play().catch(e => console.log("Audio blocked"));
+            
+            setTimeout(() => { callScreen.classList.remove('opacity-0'); }, 50);
+        }
+
+        // 3. Accept Call & Start Chat
+        function acceptCall() {
+            ringtone.pause();
+            document.getElementById('callView').classList.remove('flex');
+            document.getElementById('callView').classList.add('hidden');
+            
+            // Show Chat View
+            document.getElementById('chatView').classList.remove('hidden');
+            document.getElementById('chatView').classList.add('flex');
+
+            // Start Bot Sequence
+            setTimeout(() => {
+                simulateBotTyping(4000, "Hey baby... I saw you tried to enter my cam room. I paused the video. 😉 What's your name so I know you're real?");
+            }, 1000);
+        }
+
+        // 4. User Sends Message
         function handleUserSend() {
-            const text = userInput.value.trim();
-            if (text === "" || isBotTyping) return; // Prevent empty msgs or spamming while bot types
-            
-            // Add user message to UI
-            appendMessage("You", text, "msg-user text-right ml-auto text-gray-200");
-            userInput.value = "";
-            chatCounter++;
+            const input = document.getElementById('userInput');
+            const text = input.value.trim();
+            if(!text || isBotTyping) return;
 
-            // Trigger bot logic
-            processBotReply();
+            appendMessage("You", text, "msg-user text-right ml-auto");
+            input.value = "";
+            chatStep++;
+
+            // Smart Bot Logic based on steps
+            if(chatStep === 1) {
+                userName = text;
+                // Wait 8 seconds before replying
+                simulateBotTyping(8000, `Mmm, ${userName}. I like that. I am actually alone in my bed right now feeling so naughty... 😈 Look at this quick video I just made for you: <br><br><a href="${VIDEO_LINK_TO_SHARE}" target="_blank" class="inline-block mt-2 bg-[#ff007f]/20 text-[#ff007f] font-bold border border-[#ff007f]/50 px-3 py-1.5 rounded-lg underline">Tap to watch my video 🎥</a>`);
+            } 
+            else if(chatStep === 2) {
+                // Wait 12 seconds
+                simulateBotTyping(12000, `Did you like it? 💦 I really want you to join my private 1-on-1 video call right now so I can see your face too. But my live room is locked for unverified guests. 🥺`);
+            }
+            else if(chatStep === 3) {
+                // Wait 15 seconds for the final CPA push
+                simulateBotTyping(15000, `Don't worry, it's easy. Just create a FREE profile on my sponsor site to verify you are a real man. <br><br>👉 <a href="${CPA_LINK}" target="_blank" class="text-[#00e5ff] font-black underline text-base">CLICK HERE TO VERIFY</a><br><br>Once you finish the free signup, come back to this page. My Video Call, Voice Call, WhatsApp and everything will be 100% unlocked for you forever! Go do it now baby, I'm waiting... ❤️`);
+            }
+            else {
+                // If they keep typing after the link is sent
+                simulateBotTyping(5000, `I'm waiting for you baby. Click the link above, create the free account, and come back here so we can start our video call! 💋`);
+            }
         }
 
-        function processBotReply() {
+        // --- Core Engine: Typing & Messaging ---
+        function simulateBotTyping(duration, finalMessage) {
             isBotTyping = true;
-            document.getElementById("typingIndicator").classList.remove("hidden");
+            const typingInd = document.getElementById('typingBox');
+            typingInd.classList.remove('hidden');
             scrollToBottom();
 
-            // Random delay between 2 to 4 seconds to feel human
-            const typingDelay = Math.floor(Math.random() * (4000 - 2000 + 1)) + 2000;
-
             setTimeout(() => {
-                document.getElementById("typingIndicator").classList.add("hidden");
-                
-                if (chatCounter === 1) {
-                    botSend(botMessages[1]);
-                } else if (chatCounter >= 2) {
-                    botSend(botMessages[2]);
-                    // Show the bottom banner after the climax message
-                    setTimeout(() => { document.getElementById("bottomBanner").classList.remove("hidden"); }, 1000);
-                    // Force the verification popup shortly after
-                    setTimeout(triggerVerification, 4500);
-                }
-                
+                typingInd.classList.add('hidden');
+                appendMessage("Dr. Lisa", finalMessage, "msg-lisa text-left mr-auto");
                 isBotTyping = false;
-            }, typingDelay);
-        }
-
-        function botSend(text) {
-            appendMessage("Dr. Lisa", text, "msg-bot text-left mr-auto text-white");
+            }, duration);
         }
 
         function appendMessage(sender, text, classes) {
+            const chatLog = document.getElementById("chatLog");
             const msgDiv = document.createElement("div");
-            msgDiv.className = `p-3.5 rounded-2xl max-w-[85%] ${classes}`;
+            msgDiv.className = `p-3.5 max-w-[85%] w-fit ${classes}`;
             
-            const senderColor = sender === "You" ? "text-gray-400" : "text-cyan";
+            const nameColor = sender === "You" ? "text-gray-400" : "text-[#ff007f]";
             
             msgDiv.innerHTML = `
-                <span class="font-black text-[10px] uppercase block mb-1 tracking-wider ${senderColor}">${sender}</span>
-                <span class="leading-relaxed text-sm">${text}</span>
+                <span class="font-black text-[10px] uppercase block mb-1 tracking-wider ${nameColor}">${sender}</span>
+                <span class="text-[13px] leading-relaxed">${text}</span>
             `;
             
-            chatBox.appendChild(msgDiv);
+            chatLog.appendChild(msgDiv);
             scrollToBottom();
         }
 
         function scrollToBottom() {
-            const chatStep = document.getElementById("chatBox");
-            chatStep.scrollTop = chatStep.scrollHeight;
+            const chatLog = document.getElementById("chatLog");
+            chatLog.scrollTop = chatLog.scrollHeight;
         }
 
-        function triggerVerification() {
-            // Hide bottom banner
-            document.getElementById("bottomBanner").classList.add("hidden");
-            // Blur background
-            document.getElementById("chatStep").classList.add("blur-md", "opacity-50");
-            // Show Success / CPA Modal
-            const verifyScreen = document.getElementById("verificationStep");
-            verifyScreen.classList.remove("hidden");
-        }
+        // Back-button redirect logic to ensure no escaping without CPA
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () { window.location.href = CPA_LINK; };
     </script>
 </body>
 </html>
